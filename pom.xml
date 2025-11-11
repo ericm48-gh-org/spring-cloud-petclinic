@@ -146,8 +146,15 @@
         </executions>
       </plugin>
 
-      <!-- Spring Boot Actuator displays build-related information if a git.properties
-        file is present at the classpath -->
+      <!-- 
+        Spring Boot Actuator displays build-related information if a git.properties
+        file is present at the classpath 
+      -->
+
+      <!--
+        
+        Turn this OFF Fer Now...
+        
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
@@ -168,6 +175,7 @@
           <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
         </configuration>
       </plugin>
+      -->
 
     </plugins>
   </build>
