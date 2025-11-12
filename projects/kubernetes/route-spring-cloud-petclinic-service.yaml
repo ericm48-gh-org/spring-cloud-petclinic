@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1 
 kind: Ingress 
 metadata:
-  name: route-spring-petclinic-service
+  name: route-spring-cloud-petclinic-service
   annotations:
     cert-manager.io/cluster-issuer: selfsigned-issuer
     kubernetes.io/ingress.class: kommander-traefik
@@ -17,49 +17,49 @@ spec:
       paths:
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /get-config/timeout #/get
         pathType: Prefix
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /get-config/game #/get
         pathType: Prefix
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /get-config/ui #/get
         pathType: Prefix
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /get-secret/from-evar #/get
         pathType: Prefix
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /get-secret/from-file1 #/get
         pathType: Prefix
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /get-secret/from-file2 #/get
         pathType: Prefix
       - backend:
           service:
-            name: spring-petclinic-service
+            name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
         path: /actuator #/get
