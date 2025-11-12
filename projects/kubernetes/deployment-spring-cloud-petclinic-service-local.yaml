@@ -6,32 +6,32 @@ items:
     kind: Service
     metadata:
       labels:
-        app: spring-petclinic-service
-      name: spring-petclinic-service
+        app: spring-cloud-petclinic-service
+      name: spring-cloud-petclinic-service
     spec:
       ports:
         - name: http
           port: 8080
           targetPort: 8080
       selector:
-        app: spring-petclinic-service
+        app: spring-cloud-petclinic-service
       type: ClusterIP
 
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: spring-petclinic-service-deployment
+      name: spring-cloud-petclinic-service-deployment
     spec:
       replicas: 1
       selector:
         matchLabels:
-          app: spring-petclinic-service
+          app: spring-cloud-petclinic-service
       template:
         metadata:
           labels:
-            app: spring-petclinic-service
+            app: spring-cloud-petclinic-service
         spec:
-          serviceAccount: spring-petclinic-service
+          serviceAccount: spring-cloud-petclinic-service
 
           securityContext:
               runAsUser: 1002
@@ -56,8 +56,8 @@ items:
           #     mountPath: /data
 
           containers:
-          - name: spring-petclinic-service
-            image: ericm24/spring-petclinic-service:2.8.3-SNAPSHOT
+          - name: spring-cloud-petclinic-service
+            image: ericm24/spring-cloud-petclinic-service:2.8.3-SNAPSHOT
             imagePullPolicy: IfNotPresent
             env:
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
@@ -93,36 +93,21 @@ items:
 #                path: /actuator/health/liveness
  
             volumeMounts:
-            - name: pvc-spring-petclinic-logs
+            - name: empty-log-volume
               mountPath: "/workspace/logs"
-            - name: pvc-spring-petclinic-configs
+            - name: empty-config-volume
               mountPath: "/workspace/configs"
-            - name: pvc-spring-petclinic-secrets
+            - name: empty-secret-volume
               mountPath: "/workspace/secrets"
-            - name: config-volume-secrets-vol 
+            - name: empty-secret-volume2
               mountPath: "/workspace/secrets2"
 
-
           volumes:
-          - name: pvc-spring-petclinic-logs
-            persistentVolumeClaim:
-              claimName: pvc-spring-logs-nfs
-          - name: pvc-spring-petclinic-configs
-            persistentVolumeClaim:
-              claimName: pvc-spring-configs-nfs
-          - name: pvc-spring-petclinic-secrets
-            persistentVolumeClaim:
-              claimName: pvc-spring-secrets-nfs
-
-          - name: data-dir
-            hostPath:
-              path: /mnt/nfsshare/k8svolumes/data
-
-          - name: config-volume-secrets-vol
-            projected:
-              sources:
-              - configMap:
-                  name: configmap-secrets-vol-as-rawfiles
-              - configMap:
-                  name: configmap-secrets-vol-as-propfiles
-
+          - name: empty-log-volume
+            emptyDir: {}      
+          - name: empty-config-volume
+            emptyDir: {}      
+          - name: empty-secret-volume
+            emptyDir: {}      
+          - name: empty-secret-volume2
+            emptyDir: {}
