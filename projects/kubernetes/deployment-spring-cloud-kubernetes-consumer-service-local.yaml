@@ -1,0 +1,113 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: spring-cloud-kubernetes-consumer-service
+      name: spring-cloud-kubernetes-consumer-service
+    spec:
+      ports:
+        - name: http
+          port: 8080
+          targetPort: 8080
+      selector:
+        app: spring-cloud-kubernetes-consumer-service
+      type: ClusterIP
+
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: spring-cloud-kubernetes-consumer-service-deployment
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: spring-cloud-kubernetes-consumer-service
+      template:
+        metadata:
+          labels:
+            app: spring-cloud-kubernetes-consumer-service
+        spec:
+          serviceAccount: spring-cloud-kubernetes-consumer-service
+
+          securityContext:
+              runAsUser: 1002
+              runAsGroup: 1000
+              fsGroup: 1000  # Ensure this matches runAsGroup              
+
+          # initContainers:
+          # - name: take-data-dir-ownership
+          #   image: alpine:3
+          #   # Give 'cnb:1000' user (id cnb is 1002) 1000 is eric permissions a mounted volume      
+          #   command:
+          #   - chown
+          #   - -R
+          #   - 1002:1000
+          #   - /data
+          #   command:
+          #   - ls
+          #   - -latr
+          #   - /data
+          #   volumeMounts:
+          #   - name: data-dir
+          #     mountPath: /data
+
+          containers:
+          - name: spring-cloud-kubernetes-consumer-service
+            image: ericm24/spring-cloud-kubernetes-consumer-service:3.3.18-SNAPSHOT
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
+                value: DEBUG
+              - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
+                value: DEBUG
+              - name: LOGGING_LEVEL_COM_ERIC                
+                value: DEBUG
+              - name: SPRING_CONFIG_IMPORT
+                value: "optional:file:/workspace/configs/timeout-settings.properties,optional:file:/workspace/configs/game-settings.properties,optional:file:/workspace/configs/ui-settings.properties,optional:file:/workspace/secrets/userid2-settings.properties,optional:file:/workspace/secrets/password2-settings.properties"
+              - name: SCK_FILE_USERID
+                value: '/dsg-platform/secrets/TEST_ERIC_TEST_USERID1'
+              - name: SCK_FILE_PASSWORD
+                value: '/dsg-platform/secrets/TEST_ERIC_TEST_PASSWORD1'
+              - name: SCK_EVAR_USERID
+                value: 'MY_SECRET_EVAR_USERID22'
+              - name: SCK_EVAR_PASSWORD
+                value: 'MY_SECRET_EVAR_PASSWORD22'
+              - name: MY_SECRET_USERID1
+                value: 'TheSuperSecretUserID33'
+              - name: MY_SECRET_PASSWORD1
+                value: 'TheSuperSecretPassWord33'
+
+            ports:
+            - containerPort: 8080
+#            readinessProbe:
+#              httpGet:
+#                port: 8080
+#                path: /actuator/health/readiness
+#            livenessProbe:
+#              httpGet:
+#                port: 8080
+#                path: /actuator/health/liveness
+ 
+            volumeMounts:
+            - name: empty-log-volume
+              mountPath: "/workspace/logs"
+            - name: empty-config-volume
+              mountPath: "/workspace/configs"
+            - name: empty-secret-volume
+              mountPath: "/workspace/secrets"
+            - name: empty-secret-volume2
+              mountPath: "/workspace/secrets2"
+
+          volumes:
+          - name: empty-log-volume
+            emptyDir: {}      
+          - name: empty-config-volume
+            emptyDir: {}      
+          - name: empty-secret-volume
+            emptyDir: {}      
+          - name: empty-secret-volume2
+            emptyDir: {}

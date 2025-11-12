@@ -1,0 +1,19 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-spring-configs-nfs
+  labels:
+    type: nfs
+spec:
+  capacity:
+    storage: 200Mi
+  accessModes:
+  - ReadWriteMany  
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    server: 10.38.207.125 #192.168.1.103
+    path: "/mnt/nfsshare/k8svolumes/data/configs"

@@ -1,0 +1,15 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-spring-configs-local
+  labels:
+    type: local
+spec:
+  storageClassName: spring-demo
+  capacity:
+    storage: 200Mi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/k8svolumes/data/configs"
