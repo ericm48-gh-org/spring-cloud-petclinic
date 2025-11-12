@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner;
+package com.eric.common.petclinic.owner;
 
 import java.time.LocalDate;
 
@@ -23,7 +23,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.BaseEntity;
+
+import com.eric.common.petclinic.model.BaseEntity;
 
 /**
  * Simple JavaBean domain object representing a visit.

@@ -6,42 +6,42 @@ items:
     kind: Service
     metadata:
       labels:
-        app: spring-cloud-kubernetes-consumer-service
-      name: spring-cloud-kubernetes-consumer-service
+        app: spring-petclinic-service
+      name: spring-petclinic-service
     spec:
       ports:
         - name: http
           port: 8080
           targetPort: 8080
       selector:
-        app: spring-cloud-kubernetes-consumer-service
+        app: spring-petclinic-service
       type: ClusterIP
 
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: spring-cloud-kubernetes-consumer-service-deployment
+      name: spring-petclinic-service-deployment
     spec:
       replicas: 1
       selector:
         matchLabels:
-          app: spring-cloud-kubernetes-consumer-service
+          app: spring-petclinic-service
       template:
         metadata:
           labels:
-            app: spring-cloud-kubernetes-consumer-service
+            app: spring-petclinic-service
         spec:
-          serviceAccount: spring-cloud-kubernetes-consumer-service
+          serviceAccount: spring-petclinic-service
 
           securityContext:
               runAsUser: 1002
               runAsGroup: 1000
               fsGroup: 1000  # Ensure this matches runAsGroup              
-
+         
           # initContainers:
           # - name: take-data-dir-ownership
           #   image: alpine:3
-          #   # Give 'cnb:1000' user (id cnb is 1002) 1000 is eric permissions a mounted volume      
+          # #   # Give 'cnb:1000' user (id cnb is 1002) 1000 is eric permissions a mounted volume      
           #   command:
           #   - chown
           #   - -R
@@ -56,8 +56,8 @@ items:
           #     mountPath: /data
 
           containers:
-          - name: spring-cloud-kubernetes-consumer-service
-            image: ericm24/spring-cloud-kubernetes-consumer-service:3.3.18-SNAPSHOT
+          - name: spring-petclinic-service
+            image: ericm24/spring-petclinic-service:2.8.3-SNAPSHOT
             imagePullPolicy: IfNotPresent
             env:
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD

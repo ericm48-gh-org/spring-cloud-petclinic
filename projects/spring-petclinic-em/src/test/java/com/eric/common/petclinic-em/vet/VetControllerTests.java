@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.vet;
+package com.eric.common.petclinic.vet;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +28,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.eric.common.petclinic.vet.Specialty;
+import com.eric.common.petclinic.vet.Vet;
+import com.eric.common.petclinic.vet.VetController;
+import com.eric.common.petclinic.vet.VetRepository;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;

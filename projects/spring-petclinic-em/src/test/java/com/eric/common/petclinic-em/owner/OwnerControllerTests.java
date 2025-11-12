@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.owner;
+package com.eric.common.petclinic.owner;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasProperty;
@@ -46,6 +46,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.eric.common.petclinic.owner.Owner;
+import com.eric.common.petclinic.owner.OwnerController;
+import com.eric.common.petclinic.owner.OwnerRepository;
+import com.eric.common.petclinic.owner.Pet;
+import com.eric.common.petclinic.owner.PetType;
+import com.eric.common.petclinic.owner.Visit;
 
 /**
  * Test class for {@link OwnerController}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.owner;
+package com.eric.common.petclinic.owner;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,6 +29,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.eric.common.petclinic.owner.Owner;
+import com.eric.common.petclinic.owner.OwnerRepository;
+import com.eric.common.petclinic.owner.Pet;
+import com.eric.common.petclinic.owner.VisitController;
 
 /**
  * Test class for {@link VisitController}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic;
+package com.eric.common.petclinic;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,8 +27,9 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.web.client.RestTemplate;
+
+import com.eric.common.petclinic.vet.VetRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class PetClinicIntegrationTests {

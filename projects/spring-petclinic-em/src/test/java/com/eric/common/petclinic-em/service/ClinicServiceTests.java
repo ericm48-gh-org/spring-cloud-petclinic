@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.service;
+package com.eric.common.petclinic.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,15 +29,16 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.samples.petclinic.owner.Owner;
-import org.springframework.samples.petclinic.owner.OwnerRepository;
-import org.springframework.samples.petclinic.owner.Pet;
-import org.springframework.samples.petclinic.owner.PetType;
-import org.springframework.samples.petclinic.owner.Visit;
-import org.springframework.samples.petclinic.vet.Vet;
-import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.eric.common.petclinic.owner.Owner;
+import com.eric.common.petclinic.owner.OwnerRepository;
+import com.eric.common.petclinic.owner.Pet;
+import com.eric.common.petclinic.owner.PetType;
+import com.eric.common.petclinic.owner.Visit;
+import com.eric.common.petclinic.vet.Vet;
+import com.eric.common.petclinic.vet.VetRepository;
 
 /**
  * Integration test of the Service and the Repository layer.
