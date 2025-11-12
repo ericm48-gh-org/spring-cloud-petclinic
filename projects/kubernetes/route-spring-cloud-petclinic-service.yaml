@@ -20,7 +20,7 @@ spec:
             name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
-        path: /.   # BasePage
+        path: /   # BasePage
         pathType: Prefix
       # - backend:
       #     service:
