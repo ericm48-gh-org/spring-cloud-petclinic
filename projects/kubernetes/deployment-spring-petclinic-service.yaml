@@ -93,24 +93,24 @@ items:
 #                path: /actuator/health/liveness
  
             volumeMounts:
-            - name: pvc-consumer-service-logs
+            - name: pvc-spring-petclinic-logs
               mountPath: "/workspace/logs"
-            - name: pvc-consumer-service-configs
+            - name: pvc-spring-petclinic-configs
               mountPath: "/workspace/configs"
-            - name: pvc-consumer-service-secrets
+            - name: pvc-spring-petclinic-secrets
               mountPath: "/workspace/secrets"
             - name: config-volume-secrets-vol 
               mountPath: "/workspace/secrets2"
 
 
           volumes:
-          - name: pvc-consumer-service-logs
+          - name: pvc-spring-petclinic-logs
             persistentVolumeClaim:
               claimName: pvc-spring-logs-nfs
-          - name: pvc-consumer-service-configs
+          - name: pvc-spring-petclinic-configs
             persistentVolumeClaim:
               claimName: pvc-spring-configs-nfs
-          - name: pvc-consumer-service-secrets
+          - name: pvc-spring-petclinic-secrets
             persistentVolumeClaim:
               claimName: pvc-spring-secrets-nfs
 
