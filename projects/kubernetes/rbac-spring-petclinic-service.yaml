@@ -1,28 +1,27 @@
 ---
 apiVersion: v1
 kind: List
-items:
-  
+items:  
   - apiVersion: v1
     kind: ServiceAccount
     metadata:
       labels:
-        app: spring-cloud-kubernetes-consumer-service
-      name: spring-cloud-kubernetes-consumer-service
+        app: spring-petclinic-service
+      name: spring-petclinic-service
 
   - apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
       labels:
-        app: spring-cloud-kubernetes-consumer-service
-      name: spring-cloud-kubernetes-consumer-service:view
+        app: spring-petclinic-service
+      name: spring-petclinic-service:view
     roleRef:
       kind: Role
       apiGroup: rbac.authorization.k8s.io
       name: namespace-reader
     subjects:
       - kind: ServiceAccount
-        name: spring-cloud-kubernetes-consumer-service
+        name: spring-petclinic-service
 
   - apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
