@@ -20,6 +20,13 @@ spec:
             name: spring-cloud-petclinic-service
             port:
               number: 8080 #8000
+        path: /.   # BasePage
+        pathType: Prefix
+      - backend:
+          service:
+            name: spring-cloud-petclinic-service
+            port:
+              number: 8080 #8000
         path: /get-config/timeout #/get
         pathType: Prefix
       - backend:
