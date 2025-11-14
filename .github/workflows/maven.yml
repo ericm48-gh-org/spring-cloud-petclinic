@@ -46,6 +46,12 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2    
 
+    - name: Select Branch
+      run: |
+        echo "Building on branch: ${{ github.event.inputs.target_branch }}"
+        git checkout ${{ github.event.inputs.target_branch }}
+        git branch -a
+
     - name: Maven Build
       run: |
         echo "Building on branch: ${{ github.event.inputs.target_branch }}"
