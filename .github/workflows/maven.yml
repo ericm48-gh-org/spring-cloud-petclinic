@@ -30,7 +30,7 @@ jobs:
     
         
     - name: Build with Maven
-      working-directory: projects/spring-cloud-petclinic-service
+      #working-directory: projects/spring-cloud-petclinic-service
       run: mvn clean compile package install -D"skipTests=true" #mvn -B package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
