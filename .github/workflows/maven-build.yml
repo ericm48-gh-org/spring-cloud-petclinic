@@ -20,8 +20,17 @@ on:
         default: 'Full'
         type: choice
         options:
-        - 'Full'
-        - 'Quick'
+          - 'Full'
+          - 'Quick'
+
+      target_branch:
+              description: 'Branch'
+              required: true
+              default: 'main'
+              type: choice
+              options:
+                - main
+                - spring-framework-to-6.2.3
 
 jobs:
   build:
