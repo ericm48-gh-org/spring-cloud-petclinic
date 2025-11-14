@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: MavenBuild-Branch-spring-framework-to-6.2.3
+name: Maven-Build
 
 on:
   # push:
@@ -20,8 +20,8 @@ on:
         default: 'full'
         type: choice
         options:
-        - 'full'
-        - 'quick'
+        - 'Full'
+        - 'Quick'
 
 jobs:
   build:
