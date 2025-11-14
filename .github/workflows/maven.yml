@@ -9,24 +9,36 @@
 name: MavenBuild-Branch-spring-framework-to-6.2.3
 
 on:
-  push:
-    branches: [ "*" ]
+  # push:
+  #   branches: [ "*" ]
+
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build Type'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+        - 'full'
+        - 'quick'
 
 jobs:
   build:
-    
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.target_branch }}
 
-    - name: Set up JDK 21
+    - name: SetUp JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    
+
     - name: Cache the Maven packages to speed up build
       uses: actions/cache@v4
       with:
@@ -34,8 +46,10 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2    
 
-    - name: Build with Maven
-      run: mvn clean compile package install -D"skipTests=true"
+    - name: Maven Build
+      run: |
+        echo "Building on branch: ${{ github.event.inputs.target_branch }}
+        mvn clean compile package install -D"skipTests=true"
 
 
       
