@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: MavenBuild-Branch-spring-framework-to-6.2.3
 
 on:
   push:
