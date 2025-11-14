@@ -10,9 +10,9 @@ name: MavenBuild-Branch-spring-framework-to-6.2.3
 
 on:
   push:
-    branches: [ "spring-framework-to-6.2.3" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
   build:
