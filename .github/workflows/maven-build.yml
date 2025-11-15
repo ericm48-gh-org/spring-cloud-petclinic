@@ -17,11 +17,11 @@ on:
       build_type:
         description: 'Build Type'
         required: true
-        default: 'Full'
+        default: 'Base'
         type: choice
         options:
+          - 'Base'
           - 'Full'
-          - 'Quick'
 
       target_branch:
               description: 'Branch'
@@ -31,6 +31,10 @@ on:
               options:
                 - main
                 - spring-framework-to-6.2.3
+
+env:
+  MVN_ARGS_BASE: 'clean compile package install -D"skipTests=true"'
+  MVN_ARGS_FULL: 'clean compile package install -D"skipTests=true" -P build-img'
 
 jobs:
   build:
@@ -66,6 +70,10 @@ jobs:
         echo "Building on branch: ${{ github.event.inputs.target_branch }}"
         cd projects/spring-cloud-petclinic-service
         echo "Current Directory: $(pwd)"
-        mvn clean compile package install -D"skipTests=true"        
+        mvn ${{ github.event.inputs.build_type == 'Base' && env.MVN_ARGS_BASE || env.MVN_ARGS_FULL }}
+
+
+
+
 
 
