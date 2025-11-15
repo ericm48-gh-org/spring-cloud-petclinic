@@ -11,7 +11,7 @@
 		<groupId>com.eric.common</groupId>		
 		<artifactId>spring-cloud-kubernetes-parent</artifactId>
 		<version>1.0.8-RELEASE</version>
-		<relativePath /> 
+		<relativePath>../spring-cloud-kubernetes-parent</relativePath>
 	</parent>
 
   <!--

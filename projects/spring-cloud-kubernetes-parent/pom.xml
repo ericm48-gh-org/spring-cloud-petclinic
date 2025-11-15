@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.3</version>		
+		<relativePath /> 
+	</parent>
+		
+	<groupId>com.eric.common</groupId>		
+	<artifactId>spring-cloud-kubernetes-parent</artifactId>
+	<version>1.0.8-RELEASE</version>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+
+	<properties>		
+		<!--  
+			spring-cloud version BS..			
+		-->
+		<spring-cloud-starter.version>4.2.1</spring-cloud-starter.version>
+		<spring-cloud.version>2024.0.0</spring-cloud.version>
+		
+		<spring-boot-starter.version>3.4.3</spring-boot-starter.version>		
+	</properties>
+
+
+	<profiles>
+		
+		<profile>
+				<id>build-jar</id>
+
+				<activation>
+        	<activeByDefault>true</activeByDefault>
+        </activation>
+        
+				<build>
+					<plugins>
+			
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-source-plugin</artifactId>
+							<version>3.2.1</version>
+			
+							<executions>
+								<execution>
+									<id>attach-sources</id>
+									<goals>
+										<goal>jar-no-fork</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+			
+					</plugins>
+			
+				</build>
+		</profile>		
+		
+		<profile>
+				<id>build-img</id>
+
+				<activation>
+        	<activeByDefault>false</activeByDefault>
+        </activation>
+				
+				<build>
+					<plugins>
+			
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-source-plugin</artifactId>
+							<version>3.2.1</version>
+			
+							<executions>
+								<execution>
+									<id>attach-sources</id>
+									<goals>
+										<goal>jar-no-fork</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+			
+						<plugin>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-maven-plugin</artifactId>
+							<configuration>
+								<image>
+									<name>${env.IMAGE}</name>
+									<builder>paketobuildpacks/builder-jammy-base:0.4.433</builder>
+								</image>
+								<goal>build-image</goal>
+							</configuration>
+							<executions>
+								<execution>
+									<id>build-image</id>
+									<phase>package</phase>
+									<goals>
+										<goal>build-image-no-fork</goal>
+									</goals>
+								</execution>
+								<execution>
+									<id>repackage</id>
+									<phase>package</phase>
+									<goals>
+										<goal>repackage</goal>
+									</goals>
+									<configuration>
+										<classifier>exec</classifier>
+									</configuration>
+								</execution>
+								<execution>
+									<goals>
+										<goal>repackage</goal>
+									</goals>
+									<configuration>
+										<classifier>exec</classifier>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+						
+					</plugins>
+			
+				</build>
+		</profile>		
+		
+	</profiles>	
+</project>
