@@ -59,18 +59,18 @@ spec:
               - all
           #readOnlyRootFilesystem: true
 
-        # livenessProbe:
-        #   httpGet:
-        #     path: /actuator/health/liveness
-        #     port: 8080
-        #   initialDelaySeconds: 300
-        #   periodSeconds: 3
-        # readinessProbe:
-        #   httpGet:
-        #     path: /actuator/health/readiness
-        #     port: 8080
-        #   initialDelaySeconds: 30
-        #   periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 300
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 5
 
           volumeMounts:
           - name: empty-log-volume
