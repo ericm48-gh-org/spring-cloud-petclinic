@@ -1,5 +1,5 @@
 ---
-# Environment: Team HPOC-NKP for AKS.
+# Environment: Ultimate HPOC-NKP for EC2.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +19,8 @@ spec:
 
       containers:
       - name: spring-cloud-petclinic-service
-        image: ericm24/spring-cloud-petclinic-service:2.8.3-SNAPSHOT
+        image: ericm24/spring-cloud-petclinic-service:2.8.4-RELEASE
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 300m
@@ -58,19 +59,19 @@ spec:
             drop:
               - all
           #readOnlyRootFilesystem: true
-          
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 300
-            periodSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 5
+
+        # livenessProbe:
+        #   httpGet:
+        #     path: /actuator/health/liveness
+        #     port: 8080
+        #   initialDelaySeconds: 300
+        #   periodSeconds: 3
+        # readinessProbe:
+        #   httpGet:
+        #     path: /actuator/health/readiness
+        #     port: 8080
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 3
 
           volumeMounts:
           - name: empty-log-volume
