@@ -103,6 +103,6 @@ jobs:
         cd projects/spring-cloud-petclinic-service
         echo "Current Directory: $(pwd)"
         IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/spring-cloud-petclinic-service:${{ github.event.inputs.image_tag }}"
-        docker tag docker.io/library/spring-cloud-petclinic-service:2.8.4-RELEASE $IMAGE_NAME
+        docker tag docker.io/library/spring-cloud-petclinic-service:${{ github.event.inputs.app_version }} $IMAGE_NAME
         docker image list
         docker push $IMAGE_NAME
