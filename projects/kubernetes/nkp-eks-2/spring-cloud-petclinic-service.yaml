@@ -1,5 +1,5 @@
 ---
-# Environment: Team HPOC-NKP for AKS.
+# Environment: Ultimate HPOC-NKP for EKS.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
