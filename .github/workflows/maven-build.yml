@@ -72,6 +72,13 @@ jobs:
         echo "Current Directory: $(pwd)"
         mvn ${{ github.event.inputs.build_type == 'Base' && env.MVN_ARGS_BASE || env.MVN_ARGS_FULL }}
 
+    - name: Docker Login GCHR
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}    
+
 
 
 
