@@ -19,7 +19,8 @@ spec:
 
       containers:
       - name: spring-cloud-petclinic-service
-        image: ericm24/spring-cloud-petclinic-service:2.8.4-RELEASE
+        image: ghcr.io/ericm48/spring-cloud-petclinic-service:2.8.4-RELEASE
+        #image: ericm24/spring-cloud-petclinic-service:2.8.4-RELEASE
         imagePullPolicy: Always
         resources:
           limits:
