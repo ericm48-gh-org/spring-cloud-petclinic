@@ -1,5 +1,6 @@
 ---
-# Environment: Ultimate HPOC-1-NKP for NKP->NKP, NKP->AKS.
+# Environment: Ultimate HPOC-2-NKP for NKP->EKS & NKP->EC2.
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-cloud-petclinic-service-deployment

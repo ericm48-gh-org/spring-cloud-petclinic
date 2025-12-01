@@ -1,5 +1,5 @@
 ---
-# Environment: Ultimate HPOC-NKP for EC2.
+# Environment: Ultimate HPOC-2-NKP->EKS.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
