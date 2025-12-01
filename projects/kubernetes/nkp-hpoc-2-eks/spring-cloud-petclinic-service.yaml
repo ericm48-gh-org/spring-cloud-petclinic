@@ -1,5 +1,5 @@
 ---
-# Environment: Ultimate HPOC-NKP for EKS.
+# Environment: Ultimate HPOC-NKP for EC2.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +19,8 @@ spec:
 
       containers:
       - name: spring-cloud-petclinic-service
-        image: ericm24/spring-cloud-petclinic-service:2.8.3-SNAPSHOT
+        image: ghcr.io/ericm48/spring-cloud-petclinic-service:2.8.4-RELEASE
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 300m
