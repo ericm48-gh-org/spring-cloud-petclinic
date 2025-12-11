@@ -74,6 +74,11 @@ jobs:
         git checkout ${{ github.event.inputs.target_branch }}
         git branch -a
 
+    - name: Confirm Docker Version
+      run: |
+        echo "Docker Version:"
+        docker version
+
     - name: Maven Build Validation
       run: |
         echo "Building on branch: ${{ github.event.inputs.target_branch }}"
