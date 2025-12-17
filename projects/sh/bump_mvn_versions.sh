@@ -14,7 +14,9 @@ usage(){
    			echo "  Example:"
    			echo "     $0  2.8.4-RELEASE, 2.8.6-RELEASE  -Executes find replace on 8.4 to 8.6 in fileset."
    			echo " "
+   			echo " Run in: /spring-cloud-petclinic/projects/sh folder! "
    			echo " "
+   			echo " "   			   			
 	exit 1
 }
 
@@ -40,6 +42,8 @@ usage(){
   
   oldVersion="$1"
   newVersion="$2"
+ 
+  # Start in /spring-cloud-petclinic/projects/sh folder!
  
 	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" ) 
 
