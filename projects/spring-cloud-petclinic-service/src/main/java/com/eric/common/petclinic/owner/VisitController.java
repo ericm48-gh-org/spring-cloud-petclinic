@@ -18,6 +18,7 @@ package com.eric.common.petclinic.owner;
 import java.util.Map;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author Michael Isvy
  * @author Dave Syer
  */
+@Slf4j
 @Controller
 class VisitController {
 

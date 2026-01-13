@@ -18,6 +18,8 @@ package com.eric.common.petclinic.system;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Controller used to showcase what happens when an exception is thrown
  *
@@ -25,16 +27,22 @@ import org.springframework.web.bind.annotation.GetMapping;
  * <p/>
  * Also see how a view that resolves to "error" has been added ("error.html").
  */
+@Slf4j
 @Controller
 class CrashController {
 
 	@GetMapping("/oups")
 	public String triggerException() {
-		throw new RuntimeException(
-				"""
-				Expected: controller used to showcase what \
-				happens when an exception is thrown\
-				""");
+
+		String message = "Expected: controller used to showcase what happens when an exception is thrown ";
+				
+		log.debug("CrashController.triggerException() Begins...");
+
+		log.error("CrashController.triggerException() *** THROWING Exception Message: " + message);
+
+		log.debug("CrashController.triggerException() Ends...");
+
+		throw new RuntimeException( message );
 	}
 
 }

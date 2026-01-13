@@ -17,6 +17,8 @@ package com.eric.common.petclinic.owner;
 
 import java.util.Collection;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Ken Krebs
  * @author Arjen Poutsma
  */
+@Slf4j
 @Controller
 @RequestMapping("/owners/{ownerId}")
 class PetController {

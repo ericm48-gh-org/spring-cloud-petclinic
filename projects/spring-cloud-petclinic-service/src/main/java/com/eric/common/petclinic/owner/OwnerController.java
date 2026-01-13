@@ -18,6 +18,8 @@ package com.eric.common.petclinic.owner;
 import java.util.List;
 import java.util.Map;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +41,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Arjen Poutsma
  * @author Michael Isvy
  */
+
+@Slf4j
 @Controller
 class OwnerController {
 
@@ -62,24 +66,48 @@ class OwnerController {
 
 	@GetMapping("/owners/new")
 	public String initCreationForm(Map<String, Object> model) {
+
+		log.debug("OwnerController.initCreationForm() Begins...");
+
 		Owner owner = new Owner();
 		model.put("owner", owner);
+
+		log.debug("OwnerController.initCreationForm() Ends...");
+
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/owners/new")
-	public String processCreationForm(@Valid Owner owner, BindingResult result) {
-		if (result.hasErrors()) {
+	public String processCreationForm(@Valid Owner owner, BindingResult bindResult) {
+
+		log.debug("OwnerController.processCreationForm() Begins...");
+
+		log.debug("OwnerController.processCreationForm() Owner: " + owner.toString());
+
+		log.debug("OwnerController.processCreationForm() BindResult: " + bindResult.toString());	
+
+		if (bindResult.hasErrors()) {
+
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
 
+		log.info("OwnerController.processCreationForm() Saving Owner:" + owner.toString());
 		this.owners.save(owner);
+	
+		log.debug("OwnerController.processCreationForm() Ends...");
+
 		return "redirect:/owners/" + owner.getId();
 	}
 
 	@GetMapping("/owners/find")
 	public String initFindForm(Map<String, Object> model) {
+
+		log.debug("OwnerController.initFindForm() Begins...");
+
 		model.put("owner", new Owner());
+
+		log.debug("OwnerController.initFindForm() Ends...");
+
 		return "owners/findOwners";
 	}
 
@@ -87,17 +115,29 @@ class OwnerController {
 	public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result,
 			Model model) {
 		// allow parameterless GET request for /owners to return all records
+
+		log.debug("OwnerController.processFindForm() Begins...");
+
 		if (owner.getLastName() == null) {
 			owner.setLastName(""); // empty string signifies broadest possible search
 		}
 
 		// find owners by last name
+
+		log.info("OwnerController.processFindForm() Searching For Owner: " + owner.getLastName());
+
 		Page<Owner> ownersResults = findPaginatedForOwnersLastName(page, owner.getLastName());
+
 		if (ownersResults.isEmpty()) {
 			// no owners found
+
+			log.info("OwnerController.processFindForm() NO Owners Found!");
+
 			result.rejectValue("lastName", "notFound", "not found");
 			return "owners/findOwners";
 		}
+
+		log.info("OwnerController.processFindForm() Found Results: " + ownersResults.getTotalElements());
 
 		if (ownersResults.getTotalElements() == 1) {
 			// 1 owner found
@@ -106,6 +146,9 @@ class OwnerController {
 		}
 
 		// multiple owners found
+
+		log.debug("OwnerController.processFindForm() Ends...");
+
 		return addPaginationModel(page, model, ownersResults);
 	}
 
@@ -127,20 +170,34 @@ class OwnerController {
 
 	@GetMapping("/owners/{ownerId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
+		
+		log.debug("OwnerController.initUpdateOwnerForm() Begins...");
+
 		Owner owner = this.owners.findById(ownerId);
 		model.addAttribute(owner);
+
+		log.debug("OwnerController.initUpdateOwnerForm() Ends...");
+
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/owners/{ownerId}/edit")
-	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result,
-			@PathVariable("ownerId") int ownerId) {
+	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId) {
+
+		log.debug("OwnerController.processUpdateOwnerForm() Begins...");
+
 		if (result.hasErrors()) {
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
 
 		owner.setId(ownerId);
+		
+		log.info("OwnerController.processUpdateOwnerForm() Saving Owner:" + owner.toString());
+
 		this.owners.save(owner);
+		
+		log.debug("OwnerController.processUpdateOwnerForm() Ends...");
+
 		return "redirect:/owners/{ownerId}";
 	}
 
@@ -151,9 +208,18 @@ class OwnerController {
 	 */
 	@GetMapping("/owners/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
+		
+		log.debug("OwnerController.showOwner() Begins...");
+
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
 		Owner owner = this.owners.findById(ownerId);
+
+		log.info("OwnerController.showOwner() Owner: " + owner.toString());
+		
 		mav.addObject(owner);
+
+		log.debug("OwnerController.showOwner() Ends...");
+
 		return mav;
 	}
 

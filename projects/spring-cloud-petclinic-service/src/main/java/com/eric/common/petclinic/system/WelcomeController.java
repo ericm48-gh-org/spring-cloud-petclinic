@@ -19,6 +19,9 @@ package com.eric.common.petclinic.system;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 class WelcomeController {
 
@@ -27,6 +30,12 @@ class WelcomeController {
 	@GetMapping("/")
 	public String welcome() 
 	{
+		log.debug("WelcomeController.welcome() Begins...");
+
+		log.info("WelcomeController.welcome() appVersion: " + appVersion);
+
+		log.debug("WelcomeController.welcome() Ends...");		
+
 		return "welcome";
 	}
 
