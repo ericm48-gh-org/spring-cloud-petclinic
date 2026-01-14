@@ -19,6 +19,9 @@ package com.eric.common.petclinic.system;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,14 +30,19 @@ class WelcomeController {
 
 	private String appVersion = System.getenv("MK_IMAGE_PUSH_TARGET");
 
+	private static final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
+
 	@GetMapping("/")
 	public String welcome() 
 	{
 		log.debug("WelcomeController.welcome() Begins...");
 
+		logger.debug("WelcomeControllerZZ.welcome() Begins...");
+
 		log.info("WelcomeController.welcome() appVersion: " + appVersion);
 
-		log.debug("WelcomeController.welcome() Ends...");		
+		log.debug("WelcomeController.welcome() Ends...");
+		logger.debug("WelcomeControllerZZ.welcome() Ends...");		
 
 		return "welcome";
 	}

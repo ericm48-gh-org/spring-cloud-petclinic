@@ -137,11 +137,33 @@
     <!-- 
       Non-Spring Dependencies
     -->
+
+    <!-- lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.30</version>
       <optional>true</optional>
+    </dependency>
+
+    <!-- Loki Logback Appender -->
+    <dependency>
+      <groupId>com.github.loki4j</groupId>
+      <artifactId>loki-logback-appender</artifactId>
+      <version>1.5.1</version>
+    </dependency>
+
+    <!--
+    <dependency>
+        <groupId>com.github.loki4j</groupId>
+        <artifactId>loki-logback-appender-jdk8</artifactId>
+        <version>1.4.0</version> 
+    </dependency>
+    -->
+
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
     </dependency>
 
   </dependencies>
