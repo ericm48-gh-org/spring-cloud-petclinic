@@ -12,7 +12,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         
-        <file>logs/${HOSTNAME}-spring-cloud-petclinic-service.log</file>
+        <file>./logs/${HOSTNAME}-spring-cloud-petclinic-service.log</file>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [${hostname}] [%thread] %-5level %logger{5} - %msg %n</pattern>        
         </encoder>
@@ -52,7 +52,7 @@
     <logger name="com.github" level="DEBUG" />    
 
     <root level="INFO">
-        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="CONSOLE" /> 
         <appender-ref ref="LOKI" />        
         <appender-ref ref="ASYNC" />
     </root>

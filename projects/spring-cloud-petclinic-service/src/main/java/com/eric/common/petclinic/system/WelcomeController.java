@@ -37,12 +37,12 @@ class WelcomeController {
 	{
 		log.debug("WelcomeController.welcome() Begins...");
 
-		logger.debug("WelcomeControllerZZ.welcome() Begins...");
+		//logger.debug("WelcomeControllerZZ.welcome() Begins...");
 
 		log.info("WelcomeController.welcome() appVersion: " + appVersion);
 
 		log.debug("WelcomeController.welcome() Ends...");
-		logger.debug("WelcomeControllerZZ.welcome() Ends...");		
+		//logger.debug("WelcomeControllerZZ.welcome() Ends...");		
 
 		return "welcome";
 	}
