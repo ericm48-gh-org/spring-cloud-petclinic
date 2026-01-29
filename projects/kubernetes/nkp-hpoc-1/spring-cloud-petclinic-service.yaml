@@ -35,7 +35,7 @@ spec:
         - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
           value: DEBUG
         - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
-          value: DEBUG
+          value: INFO
         - name: LOGGING_LEVEL_COM_ERIC                
           value: DEBUG
         - name: SPRING_CONFIG_IMPORT
