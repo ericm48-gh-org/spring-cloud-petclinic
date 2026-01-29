@@ -6,16 +6,15 @@
 
     <h2 th:text="#{welcome}">Welcome</h2>
 
-    <h2 th:text="ApplicationVersion"></h2>
+    <br>
+    <p>Application Version: <span th:text="${applicationVersion}"> </span></p>
 
-    <h2 th:text="#{appVersion}">ApplicationVersion</h2>
-    
-    <p>Bananas are delicious. Bananas are delicious. Bananas are delicious.</p>
+    <br>
+    <p>Current Date-Time: <span th:text="${currentDate}"> </span></p>
 
-    <p th:text="#{app.version}">Welcome></p>
-
-    <p th:text="#{appversion}">AppVersion></p>
-
+    <br>
+    <br>
+    <br>            
     <div class="row">
         <div class="col-md-12">
           <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>

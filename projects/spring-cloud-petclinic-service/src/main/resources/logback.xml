@@ -31,9 +31,10 @@
             </label>
             <message>
                 <pattern>
-                    %d{yyyy-MM-dd HH:mm:ss} [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n
+                    %d{yyyy-MM-dd HH:mm:ss} [${hostname}] [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n
                 </pattern>
             </message>
+            <sortByTime>true</sortByTime>            
         </format>
     </appender>
 

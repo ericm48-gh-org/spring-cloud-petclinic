@@ -44,8 +44,8 @@ class WelcomeController {
  	@Value("${application.version}")
 	private String APP_VERSION;
 
-	@Value("${welcome.message}")
-	private String WELCOME_MESSAGE;
+	// @Value("${welcome.message}")
+	// private String WELCOME_MESSAGE;
 
 	@GetMapping("/")
 
@@ -57,21 +57,19 @@ class WelcomeController {
 		logger.debug("Begins...");
 
 		logger.info("APP_VERSION: " + APP_VERSION);
-		logger.debug("WELCOME_MESSAGE: " + WELCOME_MESSAGE);
 
-        model.addAttribute("application.version", APP_VERSION);
-        model.addAttribute("welcome.message", WELCOME_MESSAGE);
-
+        model.addAttribute("applicationVersion", APP_VERSION);
         model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
-        model.addAttribute("current.date", new java.util.Date());
+        model.addAttribute("currentDate", getCurrentDateTime());
+
+		logger.debug("ModelSize: " + model.asMap().size());
 
 		logger.debug("Ends...");
 
 		return "welcome";
 	}
 
-
-	public String getCurrentDateTime()
+	private String getCurrentDateTime()
     {
         Log logger = methIDgetCurrentDateTime;
         String returnValue = null;
@@ -79,6 +77,8 @@ class WelcomeController {
         logger.debug("Begins...");
 
         returnValue = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+
+        logger.debug("returnValue: " + returnValue);
 
         logger.debug("Ends...");
 
