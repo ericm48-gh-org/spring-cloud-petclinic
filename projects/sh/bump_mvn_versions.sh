@@ -47,7 +47,7 @@ usage(){
  
 	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/src/main/resources/application.properties" ) 
 
-	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties" ) 
+	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties-e" ) 
  
  	echo ""
  	echo "OldVersion: $oldVersion"
