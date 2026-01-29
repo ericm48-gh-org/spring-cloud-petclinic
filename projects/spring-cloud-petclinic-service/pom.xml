@@ -121,7 +121,7 @@
       <classifier>jakarta</classifier>
     </dependency>
 
-    <!-- webjars -->
+    <!-- webjars begins -->
     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>bootstrap</artifactId>
@@ -132,7 +132,7 @@
       <artifactId>font-awesome</artifactId>
       <version>${webjars-font-awesome.version}</version>
     </dependency>
-    <!-- end of webjars -->
+    <!-- webjars ends -->
 
     <!-- 
       Non-Spring Dependencies
@@ -146,28 +146,31 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- Loki Logback Appender -->
+    <!-- Loki/Logback -->
     <dependency>
       <groupId>com.github.loki4j</groupId>
       <artifactId>loki-logback-appender</artifactId>
       <version>1.5.1</version>
     </dependency>
 
-    <!--
     <dependency>
-        <groupId>com.github.loki4j</groupId>
-        <artifactId>loki-logback-appender-jdk8</artifactId>
-        <version>1.4.0</version> 
+        <groupId>org.codehaus.janino</groupId>
+        <artifactId>janino</artifactId>
+        <version>3.1.12</version>
     </dependency>
-    -->
 
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
     </dependency>
 
-  </dependencies>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>1.5.18</version>
+    </dependency>
 
+  </dependencies>
 
   <build>
     <plugins>

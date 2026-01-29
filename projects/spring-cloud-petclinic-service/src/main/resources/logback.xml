@@ -18,25 +18,37 @@
         </encoder>
     </appender>
 
-
-    <!-- Loki Logging -->
-    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
-        <http>
-            <url>http://localhost:3100/loki/api/v1/push</url>
-        </http>
-        <format>
-            <label>
-                <pattern>app=spring-cloud-petclinic-service, environment=production, region=us-west-1, level=%level</pattern>
-                <readMarkers>true</readMarkers>
-            </label>
-            <message>
-                <pattern>
-                    %d{yyyy-MM-dd HH:mm:ss} [${hostname}] [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n
-                </pattern>
-            </message>
-            <sortByTime>true</sortByTime>            
-        </format>
-    </appender>
+    <!-- 
+        Loki Logging 
+    -->
+    <!--
+    <if condition='isDefined("LOKI_HOST_URL")'>
+    -->
+    
+    <if condition='isNull("LOKI_HOST_URL")'>
+        <then>
+        </then>
+        <else>
+            <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+                <http>
+                    <url>${LOKI_HOST_URL}/loki/api/v1/push</url>
+                </http>
+                <format>
+                    <label>
+                        <pattern>app=spring-cloud-petclinic-service, environment=production, region=us-west-1, level=%level</pattern>
+                        <readMarkers>true</readMarkers>
+                    </label>
+                    <message>
+                        <pattern>
+                            %d{yyyy-MM-dd HH:mm:ss} [${hostname}] [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n
+                        </pattern>
+                    </message>
+                    <sortByTime>true</sortByTime>            
+                </format>
+            </appender>
+        </else>
+        
+    </if>
 
     <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="FILE" />
@@ -52,10 +64,35 @@
     <logger name="com.eric" level="DEBUG" />
     <logger name="com.github" level="DEBUG" />    
 
-    <root level="INFO">
-        <appender-ref ref="CONSOLE" /> 
-        <appender-ref ref="LOKI" />        
-        <appender-ref ref="ASYNC" />
-    </root>
+    <if condition='isNull("LOKI_HOST_URL")'>
+
+        <then>
+            <root level="INFO">
+                <appender-ref ref="CONSOLE" />        
+                <appender-ref ref="ASYNC" />
+            </root>
+
+        </then>
+
+        <else>
+            <root level="INFO">
+                <appender-ref ref="CONSOLE" />        
+                <appender-ref ref="ASYNC" />
+                <appender-ref ref="LOKI" />
+            </root>
+        </else>
+
+    </if>
+
+
+
+
+
+
+
+
+
+
+
 
 </configuration>
