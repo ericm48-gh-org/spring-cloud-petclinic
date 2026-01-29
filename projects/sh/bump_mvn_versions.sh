@@ -45,9 +45,9 @@ usage(){
  
   # Start in /spring-cloud-petclinic/projects/sh folder!
  
-	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/source/main/resources/application.properties"  ) 
+	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/src/main/resources/application.properties" ) 
 
-	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/source/main/resources/application.properties" ) 
+	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties" ) 
  
  	echo ""
  	echo "OldVersion: $oldVersion"
