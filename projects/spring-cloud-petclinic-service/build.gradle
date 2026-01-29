@@ -6,8 +6,8 @@ plugins {
 
 apply plugin: 'java'
 
-group = 'org.springframework.samples'
-version = '2.7.3'
+group = 'com.eric.common'
+version = '2.8.22-RELEASE'
 sourceCompatibility = '11'
 
 repositories {
