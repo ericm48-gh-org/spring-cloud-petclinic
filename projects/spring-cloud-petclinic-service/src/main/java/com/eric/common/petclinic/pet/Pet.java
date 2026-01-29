@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.eric.common.petclinic.owner;
+package com.eric.common.petclinic.pet;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -33,6 +33,7 @@ import jakarta.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.eric.common.petclinic.model.NamedEntity;
+import com.eric.common.petclinic.visit.Visit;
 
 /**
  * Simple business object representing a pet.

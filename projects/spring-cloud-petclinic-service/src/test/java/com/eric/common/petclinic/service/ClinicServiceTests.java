@@ -34,11 +34,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eric.common.petclinic.owner.Owner;
 import com.eric.common.petclinic.owner.OwnerRepository;
-import com.eric.common.petclinic.owner.Pet;
-import com.eric.common.petclinic.owner.PetType;
-import com.eric.common.petclinic.owner.Visit;
+import com.eric.common.petclinic.pet.Pet;
+import com.eric.common.petclinic.pet.PetType;
 import com.eric.common.petclinic.vet.Vet;
 import com.eric.common.petclinic.vet.VetRepository;
+import com.eric.common.petclinic.visit.Visit;
 
 /**
  * Integration test of the Service and the Repository layer.

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.eric.common.petclinic.owner;
+package com.eric.common.petclinic.pet;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,10 +28,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.eric.common.petclinic.owner.Owner;
 import com.eric.common.petclinic.owner.OwnerRepository;
-import com.eric.common.petclinic.owner.Pet;
-import com.eric.common.petclinic.owner.PetController;
-import com.eric.common.petclinic.owner.PetType;
-import com.eric.common.petclinic.owner.PetTypeFormatter;
+import com.eric.common.petclinic.pet.Pet;
+import com.eric.common.petclinic.pet.PetController;
+import com.eric.common.petclinic.pet.PetType;
+import com.eric.common.petclinic.pet.PetTypeFormatter;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

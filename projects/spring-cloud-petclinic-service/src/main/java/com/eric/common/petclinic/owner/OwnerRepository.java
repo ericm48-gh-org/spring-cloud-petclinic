@@ -24,6 +24,8 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eric.common.petclinic.pet.PetType;
+
 /**
  * Repository class for <code>Owner</code> domain objects All method names are compliant
  * with Spring Data naming conventions so this interface can easily be extended for Spring

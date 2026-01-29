@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.eric.common.petclinic.owner;
+package com.eric.common.petclinic.pet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -33,8 +33,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.eric.common.petclinic.owner.OwnerRepository;
-import com.eric.common.petclinic.owner.PetType;
-import com.eric.common.petclinic.owner.PetTypeFormatter;
+import com.eric.common.petclinic.pet.PetType;
+import com.eric.common.petclinic.pet.PetTypeFormatter;
 
 /**
  * Test class for {@link PetTypeFormatter}

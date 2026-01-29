@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.eric.common.petclinic.owner;
+package com.eric.common.petclinic.pet;
 
 import java.util.Collection;
 import jakarta.validation.Valid;
@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.eric.common.petclinic.owner.Owner;
+import com.eric.common.petclinic.owner.OwnerRepository;
 
 /**
  * @author Juergen Hoeller

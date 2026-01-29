@@ -33,6 +33,8 @@ import org.springframework.core.style.ToStringCreator;
 import org.springframework.util.Assert;
 
 import com.eric.common.petclinic.model.Person;
+import com.eric.common.petclinic.pet.Pet;
+import com.eric.common.petclinic.visit.Visit;
 
 /**
  * Simple JavaBean domain object representing an owner.

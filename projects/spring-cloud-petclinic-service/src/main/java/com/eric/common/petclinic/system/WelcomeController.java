@@ -16,35 +16,73 @@
 
 package com.eric.common.petclinic.system;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @Controller
 class WelcomeController {
 
-	private String appVersion = System.getenv("MK_IMAGE_PUSH_TARGET");
+	private static final Log methIDwelcome, methIDgetCurrentDateTime;
+	
+	static
+    {
+        methIDwelcome          		= LogFactory.getLog(WelcomeController.class.getName() + ".welcome()");
+        methIDgetCurrentDateTime    = LogFactory.getLog(WelcomeController.class.getName() + ".getCurrentDateTime()");
+    }
+	
+ 	@Value("${application.version}")
+	private String APP_VERSION;
 
-	private static final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
+	@Value("${welcome.message}")
+	private String WELCOME_MESSAGE;
 
 	@GetMapping("/")
-	public String welcome() 
+
+	//public String welcome()
+	public String welcome(Model model) 	
 	{
-		log.debug("WelcomeController.welcome() Begins...");
+		Log logger = methIDwelcome;
+ 
+		logger.debug("Begins...");
 
-		//logger.debug("WelcomeControllerZZ.welcome() Begins...");
+		logger.info("APP_VERSION: " + APP_VERSION);
+		logger.debug("WELCOME_MESSAGE: " + WELCOME_MESSAGE);
 
-		log.info("WelcomeController.welcome() appVersion: " + appVersion);
+        model.addAttribute("application.version", APP_VERSION);
+        model.addAttribute("welcome.message", WELCOME_MESSAGE);
 
-		log.debug("WelcomeController.welcome() Ends...");
-		//logger.debug("WelcomeControllerZZ.welcome() Ends...");		
+        model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
+        model.addAttribute("current.date", new java.util.Date());
+
+		logger.debug("Ends...");
 
 		return "welcome";
 	}
+
+
+	public String getCurrentDateTime()
+    {
+        Log logger = methIDgetCurrentDateTime;
+        String returnValue = null;
+
+        logger.debug("Begins...");
+
+        returnValue = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+
+        logger.debug("Ends...");
+
+        return( returnValue );
+    }
 
 }

@@ -18,7 +18,8 @@
             "mainClass": "com.eric.common.petclinic.PetClinicApplication",
             "projectName": "spring-cloud-petclinic-service",
             "env": {
-                    "MK_IMAGE_PUSH_TARGET": "spring-cloud-petclinic-service:2.8.4-RELEASE"
+                    "MK_IMAGE_PUSH_TARGET": "spring-cloud-petclinic-service:2.8.16-SNAPSHOT",
+                    "APP_VERSION": "eVar-Version-Launch-JSON"                    
             }
         }
     ]
