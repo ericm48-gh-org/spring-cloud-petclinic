@@ -76,7 +76,7 @@ spec:
 
           volumeMounts:
           - name: empty-log-volume
-            mountPath: "/workspace/logs"
+            mountPath: "/logs"
           - name: empty-config-volume
             mountPath: "/workspace/configs"
           - name: empty-secret-volume
