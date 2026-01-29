@@ -7,7 +7,7 @@ plugins {
 apply plugin: 'java'
 
 group = 'com.eric.common'
-version = '2.8.24-RELEASE'
+version = '2.8.26-RELEASE'
 sourceCompatibility = '11'
 
 repositories {

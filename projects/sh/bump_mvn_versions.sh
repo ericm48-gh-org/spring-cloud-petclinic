@@ -112,5 +112,9 @@ usage(){
 			git commit -m "Bump Version: $oldVersion To: $newVersion"
 	
   		git push
+  		
+			git tag $newVersion
+			
+			git push origin --tags
 
 	fi
