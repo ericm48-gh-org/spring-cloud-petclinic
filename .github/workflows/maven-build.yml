@@ -86,6 +86,10 @@ jobs:
         echo "Docker Version:"
         docker version
 
+    - name: Clean Up Docker
+      run: |        
+        docker system prune -af
+
     - name: Maven Build Validation
       run: |
         echo "Building on branch: ${{ github.event.inputs.target_branch }}"
