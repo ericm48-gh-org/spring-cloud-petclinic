@@ -20,9 +20,9 @@ on:
         default: 'Base'
         type: choice
         options:
-          - 'Base'
           - 'Full'
-
+          - 'Base'
+          
       target_branch:
               description: 'Branch'
               required: true
