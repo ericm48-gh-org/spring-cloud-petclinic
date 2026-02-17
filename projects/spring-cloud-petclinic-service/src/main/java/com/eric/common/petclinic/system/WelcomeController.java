@@ -26,6 +26,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.eric.common.petclinic.util.SmartHostNameUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -44,21 +46,24 @@ class WelcomeController {
  	@Value("${application.version}")
 	private String APP_VERSION;
 
-	// @Value("${welcome.message}")
-	// private String WELCOME_MESSAGE;
+
 
 	@GetMapping("/")
 
 	//public String welcome()
 	public String welcome(Model model) 	
 	{
+   		String hostName = null;		
 		Log logger = methIDwelcome;
  
 		logger.debug("Begins...");
 
 		logger.info("APP_VERSION: " + APP_VERSION);
 
+		hostName = SmartHostNameUtil.getHostName();
+
         model.addAttribute("applicationVersion", APP_VERSION);
+        model.addAttribute("hostName", hostName);		
         model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
         model.addAttribute("currentDate", getCurrentDateTime());
 

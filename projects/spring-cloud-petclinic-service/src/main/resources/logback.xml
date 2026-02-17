@@ -12,7 +12,7 @@
 
     <!-- 
     
-        Temporarily Disable Logging
+        Temporarily Disable FILE Logging
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         
