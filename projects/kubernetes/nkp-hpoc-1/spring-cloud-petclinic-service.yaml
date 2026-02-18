@@ -15,7 +15,7 @@ spec:
         name: spring-cloud-petclinic-service
     spec:
       securityContext:
-        fsGroup: 1000
+        fsGroup: 1000 
 
       containers:
       - name: spring-cloud-petclinic-service
