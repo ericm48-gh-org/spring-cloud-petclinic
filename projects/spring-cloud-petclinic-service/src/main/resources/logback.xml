@@ -30,9 +30,6 @@
     <!-- 
         Loki Logging 
     -->
-    <!--
-    <if condition='isDefined("LOKI_HOST_URL")'>
-    -->
     
     <if condition='isNull("LOKI_HOST_URL")'>
         <then>
@@ -92,16 +89,5 @@
         </else>
 
     </if>
-
-
-
-
-
-
-
-
-
-
-
 
 </configuration>
