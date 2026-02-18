@@ -43,7 +43,7 @@ on:
 
 env:
   MVN_ARGS_BASE: 'clean compile package install -D"skipTests=true"'
-  MVN_ARGS_FULL: 'clean compile package install -D"skipTests=true" -P build-img'
+  MVN_ARGS_FULL: 'clean compile package install -D"skipTests=true" -P build-img -Dspring-boot.build-image.imagePlatform=linux/amd64'
 
 jobs:
   build:
