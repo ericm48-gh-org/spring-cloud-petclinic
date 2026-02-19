@@ -93,7 +93,13 @@
 							<configuration>
 								<image>
 									<name>${env.IMAGE}</name>
+									
+									<builder>paketobuildpacks/builder-jammy-base:0.4.543</builder>
+									
+									<!--
 									<builder>paketobuildpacks/builder-jammy-base:0.4.433</builder>
+									-->
+
 								</image>
 								<goal>build-image</goal>
 							</configuration>
