@@ -88,7 +88,8 @@ jobs:
 
     - name: Clean Up Docker
       run: |        
-        docker system prune -af
+        docker rmi -f $(docker images -a -q) 
+        docker system prune -af --volumes
 
     - name: Maven Build Validation
       run: |
