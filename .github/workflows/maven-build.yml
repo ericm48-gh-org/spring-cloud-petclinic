@@ -86,9 +86,12 @@ jobs:
         echo "Docker Version:"
         docker version
 
+    - name: List Docker Existing Images
+      run: |
+        docker images
+
     - name: Clean Up Docker
-      run: |        
-        docker rmi -f "$(docker images -a -q)"
+      run: |
         docker system prune -af --volumes
 
     - name: Maven Build Validation
