@@ -16,7 +16,7 @@
 		
 	<groupId>com.eric.common</groupId>		
 	<artifactId>spring-cloud-kubernetes-parent</artifactId>
-	<version>1.0.10-RELEASE</version>
+	<version>1.0.12-RELEASE</version>
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 
@@ -75,8 +75,10 @@
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-source-plugin</artifactId>
+							<version>3.4.0</version>
+							<!--
 							<version>3.2.1</version>
-			
+							-->
 							<executions>
 								<execution>
 									<id>attach-sources</id>
@@ -95,7 +97,7 @@
 									<name>${env.IMAGE}</name>
 									
 									<builder>paketobuildpacks/builder-jammy-base:0.4.543</builder>
-									
+
 									<!--
 									<builder>paketobuildpacks/builder-jammy-base:0.4.433</builder>
 									-->
