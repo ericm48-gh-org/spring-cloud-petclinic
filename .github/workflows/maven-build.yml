@@ -94,6 +94,10 @@ jobs:
       run: |
         docker system prune -af --volumes
 
+    - name: Check Diskspace
+      run: |
+        df -h
+
     - name: Maven Build Validation
       run: |
         echo "Building on branch: ${{ github.event.inputs.target_branch }}"
