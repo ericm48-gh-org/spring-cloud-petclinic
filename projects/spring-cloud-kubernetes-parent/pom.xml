@@ -25,9 +25,8 @@
 			spring-cloud version BS..			
 		-->
 		<spring-cloud-starter.version>4.2.1</spring-cloud-starter.version>
-		<spring-cloud.version>2024.0.0</spring-cloud.version>
-		
-		<spring-boot-starter.version>3.4.3</spring-boot-starter.version>		
+		<spring-cloud.version>2024.0.0</spring-cloud.version>		
+		<spring-boot-starter.version>3.4.13</spring-boot-starter.version>		
 	</properties>
 
 
@@ -39,19 +38,15 @@
 				<activation>
         	<activeByDefault>true</activeByDefault>
         </activation>
-        
+
+				<!--
 				<build>
 					<plugins>
 			
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-source-plugin</artifactId>
-
 							<version>3.4.0</version>
-							<!--
-							<version>3.2.1</version>
-							-->
-
 							<executions>
 								<execution>
 									<id>attach-sources</id>
@@ -65,10 +60,12 @@
 					</plugins>
 			
 				</build>
+				-->
+
 		</profile>		
 		
 		<profile>
-				<id>build-img</id>
+			<id>build-img</id>
 		<activation>
         	<activeByDefault>false</activeByDefault>
         </activation>

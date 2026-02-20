@@ -24,13 +24,14 @@ on:
           - 'Full'          
 
       target_branch:
-              description: 'Branch'
-              required: true
-              default: 'spring-framework-to-6.2.3'
-              type: choice
-              options:
-                - main
-                - spring-framework-to-6.2.3
+        description: 'Branch'
+        required: true
+        default: 'spring-framework-to-6.2.3'
+        type: choice
+        options:
+          - spring-framework-to-6.2.3
+          - main
+
       app_version:
         description: 'Application Version'
         required: true
