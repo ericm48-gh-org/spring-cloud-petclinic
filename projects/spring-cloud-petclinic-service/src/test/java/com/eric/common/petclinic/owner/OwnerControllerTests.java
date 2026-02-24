@@ -41,15 +41,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.eric.common.petclinic.owner.Owner;
-import com.eric.common.petclinic.owner.OwnerController;
-import com.eric.common.petclinic.owner.OwnerRepository;
 import com.eric.common.petclinic.pet.Pet;
 import com.eric.common.petclinic.pet.PetType;
 import com.eric.common.petclinic.visit.Visit;
@@ -67,7 +64,7 @@ class OwnerControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@MockBean
+	@MockitoBean //@MockBean
 	private OwnerRepository owners;
 
 	private Owner george() {
