@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: spring-cloud-petclinic-service-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       name: spring-cloud-petclinic-service
