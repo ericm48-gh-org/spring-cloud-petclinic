@@ -95,7 +95,7 @@ jobs:
         echo "Docker Version:"
         docker version
 
-    - name: List Docker Existing Images
+    - name: List Docker Existing Images-1
       run: |
         docker images
 
@@ -128,6 +128,14 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}    
+
+    - name: Slight-Pause-15-Seconds
+      run: |
+        sleep 15s
+
+    - name: List Docker Existing Images-2
+      run: |
+        docker images
 
     - name: GHCR Image Push
       if: ${{ github.event.inputs.build_type == 'Full' }}
