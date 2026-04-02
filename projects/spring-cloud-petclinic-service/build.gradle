@@ -3,7 +3,7 @@
 //
 
 group = 'com.eric.common'
-version = '2.8.38-RELEASE'
+version = '2.8.40-RELEASE'
 
 ext {
     set("springCloudVersion", "2024.0.0")
