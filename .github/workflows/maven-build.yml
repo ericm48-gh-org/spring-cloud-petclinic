@@ -70,7 +70,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # YANK THIS for when using Local-Runner!  It will use local runner's docker enviro..
+    # YANK THIS for when using Remote-Runner!  It will use Remote runner's docker enviro..
+    # Otherwise the image is built in a separate enviro (remote runners-local), and GHA cannot
+    # find said image in its insulated-enviro -DOH!
 
     #- name: SetUp Docker
     #  # Use the specific action for installing a custom Docker version
