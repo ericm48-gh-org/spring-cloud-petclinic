@@ -55,7 +55,7 @@ jobs:
     - name: Confirm Runner-ID
       run: |
         echo ""
-        echo "Machine: $HOSTNAME"
+        echo "Runner-Machine: $HOSTNAME"
         echo ""
 
     - name: Checkout Repository
