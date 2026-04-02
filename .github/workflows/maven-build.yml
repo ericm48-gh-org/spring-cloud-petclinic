@@ -137,9 +137,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}    
 
-    - name: Slight-Pause-15-Seconds
+    - name: Slight-Pause-5-Seconds
       run: |
-        sleep 15s
+        sleep 5s
 
     - name: List Docker Existing Images-2
       run: |
