@@ -70,12 +70,20 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: SetUp Docker
-      # Use the specific action for installing a custom Docker version
-      uses: docker/setup-docker-action@v1
-      with:
-        # Specify the desired version number (e.g., 'v27.4.0')
-        version: v28.0.4 # v28.5.1, v28.0.4
+    # YANK THIS for when using Local-Runner!  It will use local runner's docker enviro..
+
+    #- name: SetUp Docker
+    #  # Use the specific action for installing a custom Docker version
+    #  uses: docker/setup-docker-action@v1
+    #  with:
+    #    # Specify the desired version number (e.g., 'v27.4.0')
+    #    version: v28.0.4 # v28.5.1, v28.0.4
+
+    - name: Docker Version
+      run: |
+        echo ""
+        docker version
+        echo ""
 
     - name: Cache the Maven packages to speed up build
       uses: actions/cache@v4
