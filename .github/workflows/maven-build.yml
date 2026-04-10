@@ -60,12 +60,15 @@ jobs:
 
     steps:
 
-    - name: Confirm Runner-ID
+    - name: Confirm Environment
       run: |
         echo ""
         echo "Runner-Machine: $HOSTNAME"
+        echo ""
         echo "User: $USER"
         echo ""
+        echo "PATH: $PATH"
+        echo ""        
 
     - name: Checkout Repository
       uses: actions/checkout@v4
