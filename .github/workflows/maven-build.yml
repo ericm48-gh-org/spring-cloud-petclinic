@@ -51,9 +51,10 @@ env:
 
 jobs:
   build:
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
-    
+    runs-on: 
+      group: "default"
+      labels: [linux, x64, github-runner-ubu-bootstrap-west-10-55-87-44-em1]
+
     permissions:
       contents: read
       packages: write
