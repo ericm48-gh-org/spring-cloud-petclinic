@@ -15,6 +15,7 @@ usage(){
    			echo "     $0  2.8.4-RELEASE, 2.8.6-RELEASE  -Executes find replace on 8.4 to 8.6 in fileset."
    			echo " "
    			echo " Run in: /spring-cloud-petclinic/projects/sh folder! "
+   			echo " **Note: Make Sure ALL-COMMITS are in BEFORE RUNNING!  Nothing Outstanding!"			
    			echo " "
    			echo " "   			   			
 	exit 1
