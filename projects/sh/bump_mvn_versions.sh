@@ -45,9 +45,9 @@ usage(){
  
   # Start in /spring-cloud-petclinic/projects/sh folder!
  
-	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/src/main/resources/application.properties" "../spring-cloud-petclinic-service/build.gradle" ) 
+	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/src/main/resources/application.properties" "../spring-cloud-petclinic-service/build.gradle" "../../.vscode/launch.json" ) 
 
-	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties-e" "../spring-cloud-petclinic-service/build.gradle-e" ) 
+	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties-e" "../spring-cloud-petclinic-service/build.gradle-e" "../../.vscode/launch.json-e" ) 
  
  	echo ""
  	echo "OldVersion: $oldVersion"
