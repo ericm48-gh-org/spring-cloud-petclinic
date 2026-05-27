@@ -13,6 +13,11 @@ items:
         - name: http
           port: 8080
           targetPort: 8080
+          protocol: TCP
+        - name: debug
+          port: 5005
+          targetPort: 5005
+          protocol: TCP
       selector:
         app: spring-cloud-petclinic-service
       type: ClusterIP
@@ -62,6 +67,8 @@ items:
             image: ericm24/spring-cloud-petclinic-service:2.8.52-RELEASE
             imagePullPolicy: IfNotPresent
             env:
+              - name: JAVA_OPTS
+                value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
                 value: DEBUG
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
@@ -83,8 +90,14 @@ items:
               - name: MY_SECRET_PASSWORD1
                 value: 'TheSuperSecretPassWord33'
 
-            ports:
+            ports:           
             - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 5005
+              name: debug
+              protocol: TCP
+
 #            readinessProbe:
 #              httpGet:
 #                port: 8080
