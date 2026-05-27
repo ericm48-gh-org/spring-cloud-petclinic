@@ -47,11 +47,9 @@ class WelcomeController {
 	private String APP_VERSION;
 
 
-
 	@GetMapping("/")
-
-	//public String welcome()
 	public String welcome(Model model) 	
+	//public String welcome()	
 	{
    		String hostName = null;		
 		Log logger = methIDwelcome;
@@ -59,6 +57,8 @@ class WelcomeController {
 		logger.debug("Begins...");
 
 		logger.info("APP_VERSION: " + APP_VERSION);
+
+		SmartHostNameUtil.getHostIp();
 
 		hostName = SmartHostNameUtil.getHostName();
 

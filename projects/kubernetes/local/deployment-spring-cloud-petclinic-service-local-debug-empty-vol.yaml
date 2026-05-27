@@ -89,7 +89,6 @@ items:
                 value: 'TheSuperSecretUserID33'
               - name: MY_SECRET_PASSWORD1
                 value: 'TheSuperSecretPassWord33'
-
             ports:           
             - containerPort: 8080
               name: http

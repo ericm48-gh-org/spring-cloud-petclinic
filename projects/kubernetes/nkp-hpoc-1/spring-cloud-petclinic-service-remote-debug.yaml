@@ -34,11 +34,16 @@ spec:
           requests:
             cpu: 100m
             memory: 300Mi
-        ports:           
-        - containerPort: 8080
-          name: http
-          protocol: TCP
+          ports:           
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          - containerPort: 5005
+            name: debug
+            protocol: TCP
         env:
+        - name: JAVA_OPTS
+          value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"        
         - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
           value: DEBUG
         - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
@@ -115,7 +120,13 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 8080
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+    - name: debug
+      port: 5005
+      targetPort: 5005
+      protocol: TCP
   selector:
     name: spring-cloud-petclinic-service

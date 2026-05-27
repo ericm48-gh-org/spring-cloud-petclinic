@@ -50,5 +50,17 @@ public class SmartHostNameUtil {
 
         return( returnValue );
     }
+
+    public static void getHostIp() {
+        try {
+            InetAddress localhost = InetAddress.getLocalHost();
+            System.out.println("Host IP: " + localhost.getHostAddress());
+            System.out.println("Host Name: " + localhost.getHostName());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    
+        return;
+    }    
 }
 
