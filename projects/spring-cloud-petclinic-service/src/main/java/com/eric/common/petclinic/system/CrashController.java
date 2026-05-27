@@ -15,34 +15,39 @@
  */
 package com.eric.common.petclinic.system;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Controller used to showcase what happens when an exception is thrown
- *
- * @author Michael Isvy
- * <p/>
- * Also see how a view that resolves to "error" has been added ("error.html").
- */
 @Slf4j
 @Controller
-class CrashController {
+class CrashController 
+{
+	private static final Log methItriggerException;
+	
+	static
+    {
+        methItriggerException  		= LogFactory.getLog(WelcomeController.class.getName() + ".triggerException()");
+    }
 
 	@GetMapping("/oups")
 	public String triggerException() {
 
-		String message = "Expected: controller used to showcase what happens when an exception is thrown ";
+		Log logger = methItriggerException;
+
+		String message = "Expected: controller used to showcase what happens when an exception is thrown.....Watch Closely!";
 				
-		log.debug("CrashController.triggerException() Begins...");
+		logger.debug("Begins...");
 
-		log.error("CrashController.triggerException() *** THROWING Exception Message: " + message);
+		log.info("Something REALLY, REALLY BAD is about to happen...");
 
-		log.debug("CrashController.triggerException() Ends...");
+		log.error("***ERROR: THROWING Exception Message: " + message);
 
 		throw new RuntimeException( message );
+				
 	}
 
 }
