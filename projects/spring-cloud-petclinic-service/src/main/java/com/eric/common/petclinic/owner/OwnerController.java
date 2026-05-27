@@ -50,7 +50,7 @@ class OwnerController {
 
 	private static final Log 
 		methIDinitCreationForm, methIDprocessCreationForm, methIDprocessFindForm, 
-		methIDinitUpdateOwnerForm, methIDprocessUpdateOwnerForm, methIDShowOwner;
+		methIDinitUpdateOwnerForm, methIDprocessUpdateOwnerForm, methIDshowOwner;
 	
 	static
     {
@@ -59,9 +59,8 @@ class OwnerController {
         methIDprocessFindForm    		= LogFactory.getLog(OwnerController.class.getName() + ".processFindForm()");
 		methIDinitUpdateOwnerForm  		= LogFactory.getLog(OwnerController.class.getName() + ".initUpdateOwnerForm()");
 		methIDprocessUpdateOwnerForm	= LogFactory.getLog(OwnerController.class.getName() + ".processUpdateOwnerForm()");
-		methIDShowOwner					= LogFactory.getLog(OwnerController.class.getName() + ".showOwner()");		
+		methIDshowOwner					= LogFactory.getLog(OwnerController.class.getName() + ".showOwner()");		
     }
-
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
@@ -103,7 +102,7 @@ class OwnerController {
 
 		logger.debug("Begins...");
 
-		logger.debug("Owner: " + owner.toString());
+		logger.debug("OwnerBefore: " + owner.toString());
 
 		logger.debug("BindResult: " + bindResult.toString());	
 
@@ -237,7 +236,7 @@ class OwnerController {
 	@GetMapping("/owners/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
 		
-		Log logger = methIDShowOwner;
+		Log logger = methIDshowOwner;
 
 		logger.debug("Begins...");
 
