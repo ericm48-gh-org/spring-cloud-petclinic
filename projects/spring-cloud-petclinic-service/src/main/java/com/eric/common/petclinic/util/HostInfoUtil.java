@@ -10,7 +10,8 @@ import java.net.UnknownHostException;
 
 
 @Slf4j
-public class HostInfoUtil {
+public class HostInfoUtil 
+{
 
    	private static final Log methIDgetHostName, methIDgetHostIPAddress;
 	
@@ -22,9 +23,10 @@ public class HostInfoUtil {
 
     public static String getHostName() 
     {
-   		Log logger = methIDgetHostName;
- 
-        String returnValue = null;
+   		Log logger              = methIDgetHostName;
+        InetAddress localhost   = null;
+
+        String returnValue      = null;
 
 		logger.debug("Begins...");
 
@@ -33,16 +35,30 @@ public class HostInfoUtil {
         
         if (returnValue == null || returnValue.isEmpty()) 
         {
-            // If not found, use the standard Java method as a fallback
             try 
             {
-                returnValue = InetAddress.getLocalHost().getHostName();
+                localhost = InetAddress.getLocalHost();
+
+                if ( localhost != null )
+                {
+                    returnValue = localhost.getHostName();
+                    logger.debug("HostNameReturned: " + returnValue);                    
+                }
+                else
+                {
+                    logger.error ("***ERROR: localhost is NULL!");
+                }
+
             } 
-            catch (UnknownHostException e) 
+            catch (UnknownHostException uhe) 
             {
-                logger.error("Could not determine host name: " + e.getMessage());
-                returnValue = "Unknown";
+                logger.error("***ERROR UnknownHostException Encountered: " + uhe.getLocalizedMessage());
             }
+            catch (Exception ex) 
+            {
+                logger.error("***ERROR Exception Encountered: " + ex.getLocalizedMessage());
+            }    
+
         }
 
         logger.info("HostName: " + returnValue);
