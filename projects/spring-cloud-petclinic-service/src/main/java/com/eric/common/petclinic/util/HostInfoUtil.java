@@ -61,8 +61,6 @@ public class HostInfoUtil
 
         }
 
-        logger.info("HostName: " + returnValue);
-
 		logger.debug("Ends...");
 
         return( returnValue );
