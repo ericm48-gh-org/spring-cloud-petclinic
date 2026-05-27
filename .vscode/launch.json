@@ -28,6 +28,14 @@
             "request": "attach",
             "hostName": "localhost",
             "port": 5005
+        },
+        {
+            "type": "java",
+            "name": "PetClinicApplication-Remote-K8s",
+            "projectName": "spring-cloud-petclinic-service",
+            "request": "attach",
+            "hostName": "10.38.236.146",
+            "port": 5005
         }        
     ]
 }

@@ -26,7 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.eric.common.petclinic.util.SmartHostNameUtil;
+import com.eric.common.petclinic.util.HostInfoUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,21 +49,21 @@ class WelcomeController {
 
 	@GetMapping("/")
 	public String welcome(Model model) 	
-	//public String welcome()	
 	{
-   		String hostName = null;		
+   		String hostName = null;	
+		String ipAddress = null;
+
 		Log logger = methIDwelcome;
- 
-		logger.debug("Begins...");
+ 		logger.debug("Begins...");
 
 		logger.info("APP_VERSION: " + APP_VERSION);
 
-		SmartHostNameUtil.getHostIp();
-
-		hostName = SmartHostNameUtil.getHostName();
+		hostName 	= HostInfoUtil.getHostName();		
+		ipAddress 	= HostInfoUtil.getHostIPAddress();
 
         model.addAttribute("applicationVersion", APP_VERSION);
-        model.addAttribute("hostName", hostName);		
+        model.addAttribute("hostName", hostName);
+        model.addAttribute("ipAddress", ipAddress);		
         model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
         model.addAttribute("currentDate", getCurrentDateTime());
 
