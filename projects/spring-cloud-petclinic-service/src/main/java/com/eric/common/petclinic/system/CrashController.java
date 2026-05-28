@@ -46,8 +46,7 @@ class CrashController
 
 		log.error("***ERROR: THROWING Exception Message: " + message);
 
-		throw new RuntimeException( message );
-				
+		throw new RuntimeException( message );				
 	}
 
 }
