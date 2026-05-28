@@ -15,6 +15,7 @@ usage(){
    			echo "     $0  2.8.4-RELEASE, 2.8.6-RELEASE  -Executes find replace on 8.4 to 8.6 in fileset."
    			echo " "
    			echo " Run in: /spring-cloud-petclinic/projects/sh folder! "
+   			echo " **Note: Make Sure ALL-COMMITS are in BEFORE RUNNING!  Nothing Outstanding!"			
    			echo " "
    			echo " "   			   			
 	exit 1
@@ -45,9 +46,9 @@ usage(){
  
   # Start in /spring-cloud-petclinic/projects/sh folder!
  
-	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/src/main/resources/application.properties" "../spring-cloud-petclinic-service/build.gradle" ) 
+	fileSet=("../spring-cloud-petclinic-service/pom.xml" "../spring-cloud-petclinic-service/.envrc" "../spring-cloud-petclinic-service/src/main/resources/application.properties" "../spring-cloud-petclinic-service/build.gradle" "../../.vscode/launch.json" ) 
 
-	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties-e" "../spring-cloud-petclinic-service/build.gradle-e" ) 
+	cleanUpfileSet=("../spring-cloud-petclinic-service/pom.xml-e" "../spring-cloud-petclinic-service/.envrc-e" "../spring-cloud-petclinic-service/src/main/resources/application.properties-e" "../spring-cloud-petclinic-service/build.gradle-e" "../../.vscode/launch.json-e" ) 
  
  	echo ""
  	echo "OldVersion: $oldVersion"
