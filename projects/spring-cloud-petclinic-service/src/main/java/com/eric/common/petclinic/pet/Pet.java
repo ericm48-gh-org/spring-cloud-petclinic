@@ -84,11 +84,11 @@ public class Pet extends NamedEntity {
 		getVisits().add(visit);
 	}
 
-	// @Override
-	// public String toString() 
-	// {
-	// 	return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
-	// 			.append("name", this.getName()).append("birthDate", this.getBirthDate()).append("type", this.getType()).append("visits", this.getVisits())				
-	// 			.toString();	
-	// }
+	@Override
+	public String toString() 
+	{
+		return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
+				.append("name", this.getName()).append("birthDate", this.getBirthDate()).append("type", this.getType()).append("visits", this.getVisits())				
+				.toString();	
+	}
 }

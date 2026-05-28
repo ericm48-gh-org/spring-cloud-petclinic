@@ -146,14 +146,6 @@ public class Owner extends Person {
 		return null;
 	}
 
-	@Override
-	public String toString() {
-		return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
-				.append("lastName", this.getLastName()).append("firstName", this.getFirstName())
-				.append("address", this.address).append("city", this.city).append("telephone", this.telephone)
-				.toString();
-	}
-
 	/**
 	 * Adds the given {@link Visit} to the {@link Pet} with the given identifier.
 	 * @param petId the identifier of the {@link Pet}, must not be {@literal null}.
@@ -171,6 +163,14 @@ public class Owner extends Person {
 		pet.addVisit(visit);
 
 		return this;
+
+	}
+	@Override
+	public String toString() {
+		return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
+				.append("lastName", this.getLastName()).append("firstName", this.getFirstName())
+				.append("address", this.address).append("city", this.city).append("telephone", this.telephone)
+				.toString();
 	}
 
 }
