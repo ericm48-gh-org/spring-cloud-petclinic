@@ -33,8 +33,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.eric.common.petclinic.owner.OwnerRepository;
-import com.eric.common.petclinic.pet.PetType;
-import com.eric.common.petclinic.pet.PetTypeFormatter;
 
 /**
  * Test class for {@link PetTypeFormatter}

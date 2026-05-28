@@ -128,8 +128,11 @@ class PetController
 		logger.debug("Begins...");
 
 		Pet pet = new Pet();
+
 		owner.addPet(pet);
 		model.put("pet", pet);
+
+		logger.debug("Pet: " + pet.toString());
 
 		logger.debug("Ends...");
 
@@ -178,6 +181,9 @@ class PetController
 		logger.debug("Begins...");
 
 		Pet pet = owner.getPet(petId);
+
+		logger.debug("Pet: " + pet.toString());
+				
 		model.put("pet", pet);
 		
 		logger.debug("Ends...");		

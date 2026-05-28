@@ -173,22 +173,6 @@ class OwnerController {
 		return addPaginationModel(page, model, ownersResults);
 	}
 
-	private String addPaginationModel(int page, Model model, Page<Owner> paginated) {
-		model.addAttribute("listOwners", paginated);
-		List<Owner> listOwners = paginated.getContent();
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", paginated.getTotalPages());
-		model.addAttribute("totalItems", paginated.getTotalElements());
-		model.addAttribute("listOwners", listOwners);
-		return "owners/ownersList";
-	}
-
-	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) {
-		int pageSize = 5;
-		Pageable pageable = PageRequest.of(page - 1, pageSize);
-		return owners.findByLastName(lastname, pageable);
-	}
-
 	@GetMapping("/owners/{ownerId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
 		
@@ -250,6 +234,26 @@ class OwnerController {
 		logger.debug("Ends...");
 
 		return mav;
+	}
+
+	private String addPaginationModel(int page, Model model, Page<Owner> paginated) 
+	{
+		model.addAttribute("listOwners", paginated);
+		List<Owner> listOwners = paginated.getContent();
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", paginated.getTotalPages());
+		model.addAttribute("totalItems", paginated.getTotalElements());
+		model.addAttribute("listOwners", listOwners);
+
+		return "owners/ownersList";
+	}
+
+	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) 
+	{
+		int pageSize = 5;
+		Pageable pageable = PageRequest.of(page - 1, pageSize);
+		
+		return owners.findByLastName(lastname, pageable);
 	}
 
 }

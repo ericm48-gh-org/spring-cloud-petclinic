@@ -30,6 +30,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
+import org.springframework.core.style.ToStringCreator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.eric.common.petclinic.model.NamedEntity;
@@ -83,4 +84,11 @@ public class Pet extends NamedEntity {
 		getVisits().add(visit);
 	}
 
+	// @Override
+	// public String toString() 
+	// {
+	// 	return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
+	// 			.append("name", this.getName()).append("birthDate", this.getBirthDate()).append("type", this.getType()).append("visits", this.getVisits())				
+	// 			.toString();	
+	// }
 }
