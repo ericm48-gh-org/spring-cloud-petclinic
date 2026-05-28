@@ -12,9 +12,28 @@
     <p>Current Date-Time: <span th:text="${currentDate}"> </span></p>
 
     <br>
+    <!--
     <p>  HostName: <span th:text="${hostName}"> </span></p>
     <p>IP-Address: <span th:text="${ipAddress}"> </span></p>
     <p> sessionID: <span th:text="${sessionID}"> </span></p>    
+    -->
+
+    <table>
+      <tbody>
+        <tr>
+          <td>&nbsp;HostName:</td>
+          <td>&nbsp;<span th:text="${hostName}"> </span></td>
+        </tr>
+        <tr>
+          <td>IP-Address:</td>
+          <td>&nbsp;<span th:text="${ipAddress}"> </span></td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;SessionID:</td>
+          <td>&nbsp;<span th:text="${sessionID}"> </span></td>
+        </tr>
+      </tbody>
+    </table>
 
     <br>
     <br>
