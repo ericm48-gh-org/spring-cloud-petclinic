@@ -84,11 +84,14 @@ public class Pet extends NamedEntity {
 		getVisits().add(visit);
 	}
 
-	@Override
-	public String toString() 
-	{
-		return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
-				.append("name", this.getName()).append("birthDate", this.getBirthDate()).append("type", this.getType()).append("visits", this.getVisits())				
-				.toString();	
-	}
+	// 28-May-2026: Disabled until I can figure out how the paginator calls pet.getName() w/o toString() defined.
+	// but if toString() is defined, it calls that instead...leaves crap on page.
+
+	// @Override
+	// public String toString() 
+	// {
+	// 	return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
+	// 			.append("name", this.getName()).append("birthDate", this.getBirthDate()).append("type", this.getType()).append("visits", this.getVisits())				
+	// 			.toString();	
+	// }
 }
