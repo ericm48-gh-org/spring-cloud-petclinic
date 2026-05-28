@@ -25,11 +25,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.eric.common.petclinic.util.HostInfoUtil;
-
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 @Controller
@@ -46,26 +47,39 @@ class WelcomeController {
  	@Value("${application.version}")
 	private String APP_VERSION;
 
-
 	@GetMapping("/")
 	public String welcome(Model model) 	
 	{
-   		String hostName = null;	
+   		String hostName  = null;	
 		String ipAddress = null;
+		RequestAttributes requestAttributes = null;
+		String sessionID = null;
 
 		Log logger = methIDwelcome;
  		logger.debug("Begins...");
 
 		logger.info("APP_VERSION: " + APP_VERSION);
 
+		requestAttributes = RequestContextHolder.getRequestAttributes();
+
 		hostName 	= HostInfoUtil.getHostName();		
 		ipAddress 	= HostInfoUtil.getHostIPAddress();
 
         model.addAttribute("applicationVersion", APP_VERSION);
         model.addAttribute("hostName", hostName);
-        model.addAttribute("ipAddress", ipAddress);		
+        model.addAttribute("ipAddress", ipAddress);
         model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
         model.addAttribute("currentDate", getCurrentDateTime());
+
+		if (requestAttributes != null )
+		{
+			sessionID = requestAttributes.getSessionId();
+			model.addAttribute("sessionID", sessionID);			
+		}
+		else
+		{
+			logger.error("***ERROR: requestAttributes is NULL!!!");
+		}
 
 		logger.debug("ModelSize: " + model.asMap().size());
 
