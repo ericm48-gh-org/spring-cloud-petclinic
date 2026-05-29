@@ -64,7 +64,7 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            image: ericm24/spring-cloud-petclinic-service:2.8.52-RELEASE
+            image: ericm24/spring-cloud-petclinic-service:2.8.64-RELEASE
             imagePullPolicy: IfNotPresent
             env:
               - name: JAVA_OPTS

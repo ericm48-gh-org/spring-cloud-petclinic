@@ -57,7 +57,7 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            image: ericm24/spring-cloud-petclinic-service:2.8.3-SNAPSHOT
+            image: ericm24/spring-cloud-petclinic-service:2.8.64-RELEASE
             imagePullPolicy: IfNotPresent
             env:
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
