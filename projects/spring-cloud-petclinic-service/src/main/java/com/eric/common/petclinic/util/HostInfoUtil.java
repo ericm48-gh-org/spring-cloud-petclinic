@@ -13,57 +13,47 @@ import java.net.UnknownHostException;
 public class HostInfoUtil 
 {
 
-   	private static final Log methIDgetHostName, methIDgetHostIPAddress;
+   	private static final Log methIDgetNodeName, methIDgetDeploymentName, methIDgetHostIPAddress;
 	
 	static
     {
-        methIDgetHostName          		= LogFactory.getLog(HostInfoUtil.class.getName() + ".getHostName()");
+        methIDgetNodeName    		    = LogFactory.getLog(HostInfoUtil.class.getName() + ".getNodeName()");        
+        methIDgetDeploymentName    		= LogFactory.getLog(HostInfoUtil.class.getName() + ".getDeploymentName()");
         methIDgetHostIPAddress     		= LogFactory.getLog(HostInfoUtil.class.getName() + ".getHostIPAddress()");        
     }
 
-    public static String getHostName() 
+    public static String getNodeName() 
     {
-   		Log logger              = methIDgetHostName;
-        InetAddress localhost   = null;
-
-        String returnValue      = null;
+   		Log logger              = methIDgetNodeName;
+        String nodeName         = null;        
 
 		logger.debug("Begins...");
 
-        // First, try getting from the HOSTNAME environment variable (common in Docker/cloud)
-        returnValue = System.getenv("HOSTNAME");
-        
-        if (returnValue == null || returnValue.isEmpty()) 
-        {
-            try 
-            {
-                localhost = InetAddress.getLocalHost();
+        // The variable KUBE_NODE_NAME should be set with the nodeName from K8s spec.
+        nodeName = System.getenv("KUBE_NODE_NAME");
 
-                if ( localhost != null )
-                {
-                    returnValue = localhost.getHostName();
-                    logger.debug("HostNameReturned: " + returnValue);                    
-                }
-                else
-                {
-                    logger.error ("***ERROR: localhost is NULL!");
-                }
-
-            } 
-            catch (UnknownHostException uhe) 
-            {
-                logger.error("***ERROR UnknownHostException Encountered: " + uhe.getLocalizedMessage());
-            }
-            catch (Exception ex) 
-            {
-                logger.error("***ERROR Exception Encountered: " + ex.getLocalizedMessage());
-            }    
-
-        }
+        logger.debug("nodeNameReturned: " + nodeName);                            
 
 		logger.debug("Ends...");
 
-        return( returnValue );
+        return( nodeName );
+    }
+
+    public static String getDeploymentName() 
+    {
+   		Log logger              = methIDgetDeploymentName;
+        String deploymentName   = null;        
+
+		logger.debug("Begins...");
+
+        // deploymentName is the HOSTNAME environment variable (common in Docker/cloud)
+        deploymentName = System.getenv("HOSTNAME");
+
+        logger.debug("deploymentNameReturned: " + deploymentName);                            
+
+		logger.debug("Ends...");
+
+        return( deploymentName );
     }
 
     public static String getHostIPAddress() 

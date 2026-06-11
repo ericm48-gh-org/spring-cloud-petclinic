@@ -18,7 +18,8 @@
             "projectName": "spring-cloud-petclinic-service",
             "env": {
                     "MK_IMAGE_PUSH_TARGET": "spring-cloud-petclinic-service:2.8.64-RELEASE",
-                    "APP_VERSION": "eVar-Version-Launch-JSON"                    
+                    "APP_VERSION": "eVar-Version-Launch-JSON",
+                    "KUBE_NODE_NAME":"${env:HOSTNAME}"                    
             }
         },
         {
@@ -34,7 +35,7 @@
             "name": "PetClinicApplication-Remote-K8s",
             "projectName": "spring-cloud-petclinic-service",
             "request": "attach",
-            "hostName": "10.38.48.153",
+            "hostName": "10.38.57.146",
             "port": 5005
         }        
     ]

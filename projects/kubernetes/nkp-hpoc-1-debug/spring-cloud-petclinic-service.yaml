@@ -25,7 +25,6 @@ spec:
         image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:2.8.62-RELEASE
         labels:
           app: spring-cloud-petclinic-service
-
         imagePullPolicy: Always
         resources:
           limits:
@@ -42,6 +41,10 @@ spec:
             name: debug
             protocol: TCP
         env:
+        - name: KUBE_NODE_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: spec.nodeName        
         - name: JAVA_OPTS
           value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"        
         - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
