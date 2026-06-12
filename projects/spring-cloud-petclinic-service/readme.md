@@ -83,12 +83,14 @@ The following items should be installed in your system:
   * [VS Code](https://code.visualstudio.com)
 
 ### Errata / Anomalies:
-* MAC-os in most cases by default does not set [export] a ```HOSTNAME``` environment variable (bash or .zsh).   You may need to add the following to your base profile:
+* Several 'Nix Distibutions do not by-default set [export] a ```HOSTNAME``` environment variable (bash or .zsh).   However, you can run ```ECHO $HOSTNAME``` and get the Hostname.   This works differently from a code standpoint.  
+
+You may need to add the following to your base profile:
     ```
     export HOSTNAME=$HOSTNAME
     ```
 
-* MAC-os in recent versions is now the ARM chipset.  Most cloud providers are AMD.  The current image-build only works on AMD architecture.
+* MAC-os in recent versions is now the ARM chipset.  Most cloud providers are AMD by default.  The current image-build only works on AMD architecture.
 
 
 ### Steps:
