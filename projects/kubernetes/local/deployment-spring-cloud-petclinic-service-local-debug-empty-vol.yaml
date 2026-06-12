@@ -39,7 +39,6 @@ items:
             app: spring-cloud-petclinic-service
         spec:
           serviceAccount: spring-cloud-petclinic-service
-
           securityContext:
               runAsUser: 1002
               runAsGroup: 1000
@@ -64,9 +63,13 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            image: ericm24/spring-cloud-petclinic-service:2.8.64-RELEASE
+            image: ericm24/spring-cloud-petclinic-service:2.8.66-SNAPSHOT
             imagePullPolicy: IfNotPresent
             env:
+              - name: KUBE_NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName                    
               - name: JAVA_OPTS
                 value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD

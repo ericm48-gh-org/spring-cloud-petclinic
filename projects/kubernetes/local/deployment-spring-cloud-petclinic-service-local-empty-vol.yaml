@@ -62,6 +62,10 @@ items:
             image: ericm24/spring-cloud-petclinic-service:2.8.64-RELEASE
             imagePullPolicy: IfNotPresent
             env:
+              - name: KUBE_NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName                    
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
                 value: DEBUG
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS

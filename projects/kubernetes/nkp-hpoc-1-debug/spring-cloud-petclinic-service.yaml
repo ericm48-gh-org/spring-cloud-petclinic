@@ -42,9 +42,9 @@ spec:
             protocol: TCP
         env:
         - name: KUBE_NODE_NAME
-                  valueFrom:
-                    fieldRef:
-                      fieldPath: spec.nodeName        
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         - name: JAVA_OPTS
           value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"        
         - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD

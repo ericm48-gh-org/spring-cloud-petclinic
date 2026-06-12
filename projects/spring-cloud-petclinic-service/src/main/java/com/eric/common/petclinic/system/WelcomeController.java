@@ -92,7 +92,7 @@ class WelcomeController {
 
 		return "welcome";
 	}
-
+	
 	private String getCurrentDateTime()
     {
         Log logger = methIDgetCurrentDateTime;
