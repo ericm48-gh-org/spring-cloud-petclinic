@@ -13,7 +13,7 @@ spec:
       name: spring-cloud-petclinic-service
   template:
     metadata:
-      labels   : 
+      labels: 
         name: spring-cloud-pe tclinic-service
         app: spring-cloud-petclinic-service   
     spec:
