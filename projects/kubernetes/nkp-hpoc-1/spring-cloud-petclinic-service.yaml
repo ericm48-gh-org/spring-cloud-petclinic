@@ -25,7 +25,6 @@ spec:
         image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:2.8.66-RELEASE
         labels:
           app: spring-cloud-petclinic-service
-
         imagePullPolicy: Always
         resources:
           limits:
