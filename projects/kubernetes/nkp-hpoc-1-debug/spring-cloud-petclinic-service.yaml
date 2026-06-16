@@ -13,8 +13,8 @@ spec:
       name: spring-cloud-petclinic-service
   template:
     metadata:
-      labels:
-        name: spring-cloud-petclinic-service
+      labels   : 
+        name: spring-cloud-pe tclinic-service
         app: spring-cloud-petclinic-service   
     spec:
       securityContext:
@@ -22,7 +22,7 @@ spec:
 
       containers:
       - name: spring-cloud-petclinic-service
-        image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:2.8.66-RELEASE
+        image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:2.8.68-RELEASE
         labels:
           app: spring-cloud-petclinic-service
         imagePullPolicy: Always
