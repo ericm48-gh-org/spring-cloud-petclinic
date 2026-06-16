@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       labels: 
-        name: spring-cloud-pe tclinic-service
+        name: spring-cloud-petclinic-service
         app: spring-cloud-petclinic-service   
     spec:
       securityContext:
