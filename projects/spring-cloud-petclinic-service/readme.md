@@ -10,7 +10,7 @@ Petclinic is a [Spring Boot](https://spring.io/guides/gs/spring-boot) applicatio
 
 
 ```
-git clone https://github.com/spring-projects/spring-cloud-petclinic.git
+git clone https://github.com/spring-projects/spring-petclinic.git
 cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
@@ -82,11 +82,22 @@ The following items should be installed in your system:
   * IntelliJ IDEA
   * [VS Code](https://code.visualstudio.com)
 
+### Errata / Anomalies:
+* Several 'Nix Distibutions do not by-default set [export] a ```HOSTNAME``` environment variable (bash or .zsh).   However, you can run ```ECHO $HOSTNAME``` and get the Hostname.   This works differently from a code standpoint.  
+
+You may need to add the following to your base profile:
+    ```
+    export HOSTNAME=$HOSTNAME
+    ```
+
+* MAC-os in recent versions is now the ARM chipset.  Most cloud providers are AMD by default.  The current image-build only works on AMD architecture.
+
+
 ### Steps:
 
 1) On the command line
     ```
-    git clone https://github.com/spring-projects/spring-cloud-petclinic.git
+    git clone https://github.com/spring-projects/spring-petclinic.git
     ```
 2) Inside Eclipse or STS
     ```
@@ -103,6 +114,20 @@ The following items should be installed in your system:
     A run configuration named `PetClinicApplication` should have been created for you if you're using a recent Ultimate version. Otherwise, run the application by right clicking on the `PetClinicApplication` main class and choosing `Run 'PetClinicApplication'`.
 
 4) Navigate to Petclinic
+
     Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
+
+## Looking for something in particular?
+
+|Spring Boot Configuration | Class or Java property files  |
+|--------------------------|---|
+|The Main Class | [PetClinicApplication](https://github.com/spring-projects/spring-petclinic/blob/main/src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java) |
+|Properties Files | [application.properties](https://github.com/spring-projects/spring-petclinic/blob/main/src/main/resources) |
+|Caching | [CacheConfiguration](https://github.com/spring-projects/spring-petclinic/blob/main/src/main/java/org/springframework/samples/petclinic/system/CacheConfiguration.java) |
+
+
+# License
+
+The Spring PetClinic sample application is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
 

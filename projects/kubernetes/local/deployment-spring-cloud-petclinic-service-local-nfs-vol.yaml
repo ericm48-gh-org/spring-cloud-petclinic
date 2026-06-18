@@ -1,0 +1,132 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: spring-cloud-petclinic-service
+      name: spring-cloud-petclinic-service
+    spec:
+      ports:
+        - name: http
+          port: 8080
+          targetPort: 8080
+      selector:
+        app: spring-cloud-petclinic-service
+      type: ClusterIP
+
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: spring-cloud-petclinic-service-deployment
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: spring-cloud-petclinic-service
+      template:
+        metadata:
+          labels:
+            app: spring-cloud-petclinic-service
+        spec:
+          serviceAccount: spring-cloud-petclinic-service
+
+          securityContext:
+              runAsUser: 1002
+              runAsGroup: 1000
+              fsGroup: 1000  # Ensure this matches runAsGroup              
+         
+          # initContainers:
+          # - name: take-data-dir-ownership
+          #   image: alpine:3
+          # #   # Give 'cnb:1000' user (id cnb is 1002) 1000 is eric permissions a mounted volume      
+          #   command:
+          #   - chown
+          #   - -R
+          #   - 1002:1000
+          #   - /data
+          #   command:
+          #   - ls
+          #   - -latr
+          #   - /data
+          #   volumeMounts:
+          #   - name: data-dir
+          #     mountPath: /data
+
+          containers:
+          - name: spring-cloud-petclinic-service
+            image: ericm24/spring-cloud-petclinic-service:2.8.64-RELEASE
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: KUBE_NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName                    
+              - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
+                value: DEBUG
+              - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
+                value: DEBUG
+              - name: LOGGING_LEVEL_COM_ERIC                
+                value: DEBUG
+              - name: SPRING_CONFIG_IMPORT
+                value: "optional:file:/workspace/configs/timeout-settings.properties,optional:file:/workspace/configs/game-settings.properties,optional:file:/workspace/configs/ui-settings.properties,optional:file:/workspace/secrets/userid2-settings.properties,optional:file:/workspace/secrets/password2-settings.properties"
+              - name: SCK_FILE_USERID
+                value: '/dsg-platform/secrets/TEST_ERIC_TEST_USERID1'
+              - name: SCK_FILE_PASSWORD
+                value: '/dsg-platform/secrets/TEST_ERIC_TEST_PASSWORD1'
+              - name: SCK_EVAR_USERID
+                value: 'MY_SECRET_EVAR_USERID22'
+              - name: SCK_EVAR_PASSWORD
+                value: 'MY_SECRET_EVAR_PASSWORD22'
+              - name: MY_SECRET_USERID1
+                value: 'TheSuperSecretUserID33'
+              - name: MY_SECRET_PASSWORD1
+                value: 'TheSuperSecretPassWord33'
+
+            ports:
+            - containerPort: 8080
+#            readinessProbe:
+#              httpGet:
+#                port: 8080
+#                path: /actuator/health/readiness
+#            livenessProbe:
+#              httpGet:
+#                port: 8080
+#                path: /actuator/health/liveness
+ 
+            volumeMounts:
+            - name: pvc-spring-petclinic-logs
+              mountPath: "/workspace/logs"
+            - name: pvc-spring-petclinic-configs
+              mountPath: "/workspace/configs"
+            - name: pvc-spring-petclinic-secrets
+              mountPath: "/workspace/secrets"
+            - name: config-volume-secrets-vol 
+              mountPath: "/workspace/secrets2"
+
+
+          volumes:
+          - name: pvc-spring-petclinic-logs
+            persistentVolumeClaim:
+              claimName: pvc-spring-logs-nfs
+          - name: pvc-spring-petclinic-configs
+            persistentVolumeClaim:
+              claimName: pvc-spring-configs-nfs
+          - name: pvc-spring-petclinic-secrets
+            persistentVolumeClaim:
+              claimName: pvc-spring-secrets-nfs
+
+          - name: data-dir
+            hostPath:
+              path: /mnt/nfsshare/k8svolumes/data
+
+          - name: config-volume-secrets-vol
+            projected:
+              sources:
+              - configMap:
+                  name: configmap-secrets-vol-as-rawfiles
+              - configMap:
+                  name: configmap-secrets-vol-as-propfiles
+

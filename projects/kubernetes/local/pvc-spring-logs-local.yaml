@@ -1,0 +1,12 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-spring-logs-local
+spec:
+  storageClassName: spring-demo
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 25Mi

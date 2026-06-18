@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [    
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "PetClinicApplication-Local-SB",
+            "request": "launch",
+            "mainClass": "com.eric.common.petclinic.PetClinicApplication",
+            "projectName": "spring-cloud-petclinic-service",
+            "env": {
+                    "MK_IMAGE_PUSH_TARGET": "spring-cloud-petclinic-service:2.8.68-RELEASE",
+                    "APP_VERSION": "eVar-Version-Launch-JSON",
+                    "KUBE_NODE_NAME": "${env:HOSTNAME}"
+            }
+        },
+        {
+            "type": "java",
+            "name": "PetClinicApplication-Local-K8s",
+            "projectName": "spring-cloud-petclinic-service",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+        },
+        {
+            "type": "java",
+            "name": "PetClinicApplication-Remote-K8s",
+            "projectName": "spring-cloud-petclinic-service",
+            "request": "attach",
+            "hostName": "10.38.57.146",
+            "port": 5005
+        }        
+    ]
+}

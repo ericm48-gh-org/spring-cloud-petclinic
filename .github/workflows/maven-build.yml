@@ -6,6 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+
+# More 4 Testing..
+
 name: maven-build
 
 on:
@@ -20,22 +23,52 @@ on:
         default: 'Full'
         type: choice
         options:
-          - 'Full'
-          - 'Quick'
+          - 'Base'
+          - 'Full'          
 
       target_branch:
-              description: 'Branch'
-              required: true
-              default: 'main'
-              type: choice
-              options:
-                - main
-                - spring-framework-to-6.2.3
+        description: 'Branch'
+        required: true
+        default: 'spring-framework-to-6.2.3'
+        type: choice
+        options:
+          - spring-framework-to-6.2.3
+          - main
+
+      app_version:
+        description: 'Application Version'
+        required: true
+        default: 'latest'
+
+      image_tag:
+        description: 'Docker Image Tag'
+        required: true
+        default: 'latest'
+
+env:
+  MVN_ARGS_BASE: 'clean compile package install -D"skipTests=true"'
+  MVN_ARGS_FULL: 'clean compile package install -D"skipTests=true" -P build-img -Dspring-boot.build-image.imagePlatform=linux/amd64'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
+    permissions:
+      contents: read
+      packages: write
+
     steps:
+
+    - name: Confirm Environment
+      run: |
+        echo ""
+        echo "Runner-Machine: $HOSTNAME"
+        echo ""
+        echo "User: $USER"
+        echo ""
+        echo "PATH: $PATH"
+        echo ""        
+
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
@@ -47,6 +80,23 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+
+    # YANK THIS for when using Remote-Runner!  It will use Remote runner's docker enviro..
+    # Otherwise the image is built in a separate enviro (remote runners-local), and GHA cannot
+    # find said image in its insulated-enviro -DOH!
+
+    #- name: SetUp Docker
+    #  # Use the specific action for installing a custom Docker version
+    #  uses: docker/setup-docker-action@v1
+    #  with:
+    #    # Specify the desired version number (e.g., 'v27.4.0')
+    #    version: v28.0.4 # v28.5.1, v28.0.4
+
+    - name: Docker Version
+      run: |
+        echo ""
+        docker version
+        echo ""
 
     - name: Cache the Maven packages to speed up build
       uses: actions/cache@v4
@@ -61,10 +111,60 @@ jobs:
         git checkout ${{ github.event.inputs.target_branch }}
         git branch -a
 
+    - name: Confirm Docker Version
+      run: |
+        echo "Docker Version:"
+        docker version
+
+    - name: List Docker Existing Images-1
+      run: |
+        docker images
+
+    - name: Clean Up Docker
+      run: |
+        docker system prune -af --volumes
+
+    - name: Check Diskspace
+      run: |
+        df -h
+
+    - name: Maven Build Validation
+      run: |
+        echo "Building on branch: ${{ github.event.inputs.target_branch }}"
+        cd projects/spring-cloud-petclinic-service
+        echo "Current Directory: $(pwd)"
+        mvn validate
+
     - name: Maven Build
       run: |
         echo "Building on branch: ${{ github.event.inputs.target_branch }}"
-        mvn clean compile package install -D"skipTests=true"
+        cd projects/spring-cloud-petclinic-service
+        echo "Current Directory: $(pwd)"
+        mvn ${{ github.event.inputs.build_type == 'Base' && env.MVN_ARGS_BASE || env.MVN_ARGS_FULL }}
 
+    - name: GHCR Docker Login
+      if: ${{ github.event.inputs.build_type == 'Full' }}    
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}    
 
-      
+    - name: Slight-Pause-5-Seconds
+      run: |
+        sleep 5s
+
+    - name: List Docker Existing Images-2
+      run: |
+        docker images
+
+    - name: GHCR Image Push
+      if: ${{ github.event.inputs.build_type == 'Full' }}
+      run: |
+        echo "Pushing Docker Image to GHCR"
+        cd projects/spring-cloud-petclinic-service
+        echo "Current Directory: $(pwd)"
+        IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/spring-cloud-petclinic-service:${{ github.event.inputs.image_tag }}"
+        docker tag docker.io/library/spring-cloud-petclinic-service:${{ github.event.inputs.app_version }} $IMAGE_NAME
+        docker image list
+        docker push $IMAGE_NAME

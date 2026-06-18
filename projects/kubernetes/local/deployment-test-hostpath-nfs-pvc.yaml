@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-test-hostpath-nfs-pvc
+  labels:
+    app: deployment-test-hostpath-nfs-pvc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deployment-test-hostpath-nfs-pvc
+  template:
+    metadata:
+      labels:
+        app: deployment-test-hostpath-nfs-pvc
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: deployment-test-hostpath-nfs-pvc
+      containers:
+      - name: pause
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        - -c
+        - 'sleep 60; for i in  $(seq 1 5); do host=$(hostname); now=$(date +"%T"); echo "adding time: $now, from $host" >> /my-test/shared.txt; sleep 10; done; sleep infinity'
+        volumeMounts:
+        - name: volv
+          mountPath: /my-test
+        ports:
+        - containerPort: 80
+        resources: {}
+      volumes:
+      - name: volv
+        persistentVolumeClaim:
+          claimName: pvc-nfs-data

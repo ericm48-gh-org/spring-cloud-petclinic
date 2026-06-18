@@ -1,0 +1,101 @@
+//
+// build.gradle
+//
+
+group = 'com.eric.common'
+version = '2.8.68-RELEASE'
+
+ext {
+    set("springCloudVersion", "2024.0.0")
+    set("springCloudStarterVersion", "4.2.1")
+    set("springBootStarterParentVersion", "3.4.3")
+}
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "io.spring.gradle:dependency-management-plugin:1.1.7"
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:3.5.3"
+  }
+}
+
+apply plugin: "org.springframework.boot" 
+apply plugin: "io.spring.dependency-management"
+apply plugin: "java"
+
+//apply plugin: "spring-boot"
+//apply plugin: "spring-boot-gradle-plugin"
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootStarterParentVersion}"
+    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"    
+  }
+}
+
+
+dependencies {
+
+    // Spring Boot Dependancies
+    implementation "org.springframework.cloud:spring-cloud-starter-bootstrap:${springCloudStarterVersion}"
+    implementation "org.springframework.cloud:spring-cloud-starter-config:${springCloudStarterVersion}"
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
+    // Spring Cloud Dependencies
+    implementation "org.springframework.cloud:spring-cloud-starter-config"
+
+    // Spring General Dependencies
+    implementation "org.springframework.retry:spring-retry"    
+    implementation "org.springframework:spring-aspects"
+
+    // Other Dependencies
+    implementation "org.projectlombok:lombok:1.18.30"
+    compileOnly "org.projectlombok:lombok:1.18.30"
+    annotationProcessor "org.projectlombok:lombok:1.18.30"
+
+    implementation "org.slf4j:slf4j-api:2.0.16"
+    implementation "org.apache.logging.log4j:log4j-to-slf4j:2.24.3"
+    implementation "org.slf4j:jul-to-slf4j:2.0.16"
+
+    // Testing
+    testImplementation "junit:junit"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.projectreactor:reactor-test"
+    testImplementation "org.wiremock:wiremock-standalone:3.13.0"
+
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    if (JavaVersion.current() != project.targetCompatibility) {
+        logger.warn('The build is using Java ${JavaVersion.current()} to build a Java ${project.targetCompatibility} compatible archive.')
+        logger.warn('See the project README for instructions on changing the target Java version.')
+    }
+}
+
+jar {
+    enabled = true
+}
+
+tasks.named("bootBuildImage") {
+
+    // AMD Arch Builder: (For building on AMD Machine)
+    //builder = "paketobuildpacks/builder-jammy-base:0.4.433"
+
+    // ARM Arch Builder: (For building on ARM Machine)
+    builder = "paketobuildpacks/builder-jammy-java-tiny:0.0.46"
+
+    environment = ["BP_JVM_VERSION": "17"] // Set JVM version for the buildpack
+    imageName = "ericm24/${rootProject.name}:${version}"  // 'my-spring-boot-app:latest' // Customize the image name
+}
