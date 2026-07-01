@@ -59,8 +59,10 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            image: ericm24/spring-cloud-petclinic-service:2.8.64-RELEASE
-            imagePullPolicy: IfNotPresent
+            image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:2.8.66-RELEASE
+            imagePullPolicy: IfNotPresent            
+            labels:
+              app: spring-cloud-petclinic-service          
             env:
               - name: KUBE_NODE_NAME
                 valueFrom:
