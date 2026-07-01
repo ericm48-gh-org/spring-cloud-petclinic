@@ -10,7 +10,7 @@ Petclinic is a [Spring Boot](https://spring.io/guides/gs/spring-boot) applicatio
 
 
 ```
-git clone https://github.com/spring-projects/spring-petclinic.git
+git clone https://github.com/spring-projects/spring-cloud-petclinic.git
 cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
@@ -97,7 +97,7 @@ You may need to add the following to your base profile:
 
 1) On the command line
     ```
-    git clone https://github.com/spring-projects/spring-petclinic.git
+    git clone https://github.com/spring-projects/spring-cloud-petclinic.git
     ```
 2) Inside Eclipse or STS
     ```
@@ -114,10 +114,10 @@ You may need to add the following to your base profile:
     A run configuration named `PetClinicApplication` should have been created for you if you're using a recent Ultimate version. Otherwise, run the application by right clicking on the `PetClinicApplication` main class and choosing `Run 'PetClinicApplication'`.
 
 4) Navigate to Petclinic
-
     Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 
+<<<<<<<< HEAD:projects/spring-cloud-petclinic-service/readme.md
 ## Looking for something in particular?
 
 |Spring Boot Configuration | Class or Java property files  |
@@ -131,3 +131,5 @@ You may need to add the following to your base profile:
 
 The Spring PetClinic sample application is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
 
+========
+>>>>>>>> 96b41009d39da3ff4a3d256d030f349caac213cb:readme.md
