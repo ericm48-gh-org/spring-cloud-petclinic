@@ -49,16 +49,20 @@ import org.springframework.web.servlet.ModelAndView;
 class OwnerController {
 
 	private static final Log 
-		methIDinitCreationForm, methIDprocessCreationForm, methIDprocessFindForm, 
+		methIDinitCreationForm, methIDprocessCreationForm, methIDinitFindForm, methIDprocessFindForm, 
 		methIDinitUpdateOwnerForm, methIDprocessUpdateOwnerForm, methIDshowOwner;
 	
 	static
     {
 		methIDinitCreationForm  		= LogFactory.getLog(OwnerController.class.getName() + ".initCreationForm()");
         methIDprocessCreationForm		= LogFactory.getLog(OwnerController.class.getName() + ".processCreationForm()");		
-        methIDprocessFindForm    		= LogFactory.getLog(OwnerController.class.getName() + ".processFindForm()");
+
+		methIDinitFindForm  			= LogFactory.getLog(OwnerController.class.getName() + ".initFindForm()");		
+		methIDprocessFindForm    		= LogFactory.getLog(OwnerController.class.getName() + ".processFindForm()");
+
 		methIDinitUpdateOwnerForm  		= LogFactory.getLog(OwnerController.class.getName() + ".initUpdateOwnerForm()");
 		methIDprocessUpdateOwnerForm	= LogFactory.getLog(OwnerController.class.getName() + ".processUpdateOwnerForm()");
+
 		methIDshowOwner					= LogFactory.getLog(OwnerController.class.getName() + ".showOwner()");		
     }
 
@@ -122,11 +126,13 @@ class OwnerController {
 	@GetMapping("/owners/find")
 	public String initFindForm(Map<String, Object> model) {
 
-		log.debug("OwnerController.initFindForm() Begins...");
+		Log logger = methIDinitFindForm;
+
+		logger.debug("OwnerController.initFindForm() Begins...");
 
 		model.put("owner", new Owner());
 
-		log.debug("OwnerController.initFindForm() Ends...");
+		logger.debug("OwnerController.initFindForm() Ends...");
 
 		return "owners/findOwners";
 	}
@@ -152,7 +158,7 @@ class OwnerController {
 		if (ownersResults.isEmpty()) {
 			// no owners found
 
-			log.info("NO Owners Found!");
+			logger.info("NO Owners Found!");
 
 			result.rejectValue("lastName", "notFound", "not found");
 			return "owners/findOwners";

@@ -42,9 +42,9 @@ class CrashController
 				
 		logger.debug("Begins...");
 
-		log.info("Something REALLY, REALLY BAD is about to happen...");
+		logger.info("Something REALLY, REALLY BAD is about to happen...");
 
-		log.error("***ERROR: THROWING Exception Message: " + message);
+		logger.error("***ERROR: THROWING Exception Message: " + message);
 
 		throw new RuntimeException( message );				
 	}
