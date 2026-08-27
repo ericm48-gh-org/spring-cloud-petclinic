@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-package com.eric.common.petclinic.system;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package com.eric.common.petclinic.welcome;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import com.eric.common.petclinic.util.HostInfoUtil;
-
-import org.springframework.boot.SpringBootVersion;
+import com.eric.common.petclinic.system.ApplicationContextProvider;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,120 +33,149 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 class WelcomeController {
 
-	private static final Log methIDwelcome, methIDgetCurrentDateTime, methIDgetJavaVersion, methIDgetSpringBootVersion;
+	private static final Log methIDwelcome; //, methIDgetCurrentDateTime, methIDgetJavaVersion, methIDgetSpringBootVersion;
 	
 	static
     {
         methIDwelcome          		= LogFactory.getLog(WelcomeController.class.getName() + ".welcome()");
-        methIDgetCurrentDateTime    = LogFactory.getLog(WelcomeController.class.getName() + ".getCurrentDateTime()");
-        methIDgetJavaVersion    	= LogFactory.getLog(WelcomeController.class.getName() + ".getJavaVersion()");		
-        methIDgetSpringBootVersion 	= LogFactory.getLog(WelcomeController.class.getName() + ".getSpringBootVersion()");			
+
+        // methIDgetCurrentDateTime    = LogFactory.getLog(WelcomeController.class.getName() + ".getCurrentDateTime()");
+        // methIDgetJavaVersion    	= LogFactory.getLog(WelcomeController.class.getName() + ".getJavaVersion()");		
+        // methIDgetSpringBootVersion 	= LogFactory.getLog(WelcomeController.class.getName() + ".getSpringBootVersion()");			
     }
 	
- 	@Value("${application.version}")
-	private String APP_VERSION;
+ 	// @Value("${application.version}")
+	// private String APP_VERSION;
 
 	@GetMapping("/")
 	public String welcome(Model model) 	
 	{
-   		String nodeName  					= null;		
-   		String deploymentName  				= null;
-		String ipAddress 					= null;
-		RequestAttributes requestAttributes = null;
-		String sessionID 					= null;
-
 		Log logger = methIDwelcome;
+
+		WelcomeAdapter welcomeAdapter			= null;
+   		// String nodeName  					= null;
+   		// String deploymentName  				= null;
+		// String ipAddress 					= null;
+		RequestAttributes requestAttributes 	= null;
+		// String sessionID 					= null;
+
+		String appVersion = null;
+
  		logger.debug("Begins...");
 
-		logger.info("APP_VERSION: " + APP_VERSION);
+		// Retrieve the context statically
+        ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+       		
+		//ApplicationContext context = PetClinicApplication.get .run(MyApplication.class, args);		
 
-		requestAttributes 	= RequestContextHolder.getRequestAttributes();
+		welcomeAdapter = context.getBean(WelcomeAdapter.class);
 
-		nodeName 			= HostInfoUtil.getNodeName();		
-		deploymentName 		= HostInfoUtil.getDeploymentName();
-		ipAddress 			= HostInfoUtil.getHostIPAddress();
+		// welcomeAdapter			= new WelcomeAdapter();
+		// welcomeAdapter 		    = WelcomeAdapter.getInstance();
 
-        model.addAttribute("applicationVersion", APP_VERSION);
+		requestAttributes 	= RequestContextHolder.getRequestAttributes();		
+		model = welcomeAdapter.toWelcomeModel(model, requestAttributes);
 
-        model.addAttribute("nodeName", nodeName);		
-        model.addAttribute("deploymentName", deploymentName);
-        model.addAttribute("ipAddress", ipAddress);
-
-        model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
-        model.addAttribute("currentDate", getCurrentDateTime());
-        model.addAttribute("javaVersion", getJavaVersion());
-        model.addAttribute("springBootVersion", getSpringBootVersion());		
-
-		if (requestAttributes != null )
+		if ( model != null )
 		{
-			sessionID = requestAttributes.getSessionId();
-			model.addAttribute("sessionID", sessionID);			
+			logger.debug("ModelReceivedSize: " + model.asMap().size());			
+			appVersion = model.getAttribute("applicationVersion").toString();
+			logger.info("APP_VERSION: " + appVersion);
 		}
-		else
+		else 
 		{
-			logger.error("***ERROR: requestAttributes is NULL!!!");
+			logger.error("***ERROR: Model Received is NULL!!");
 		}
 
-		logger.debug("ModelSize: " + model.asMap().size());
+
+
+
+		// nodeName 			= HostInfoUtil.getNodeName();		
+		// deploymentName 		= HostInfoUtil.getDeploymentName();
+		// ipAddress 			= HostInfoUtil.getHostIPAddress();
+
+        // model.addAttribute("applicationVersion", APP_VERSION);
+
+        // model.addAttribute("nodeName", nodeName);		
+        // model.addAttribute("deploymentName", deploymentName);
+        // model.addAttribute("ipAddress", ipAddress);
+
+        // model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
+        // model.addAttribute("currentDate", getCurrentDateTime());
+        // model.addAttribute("javaVersion", getJavaVersion());
+        // model.addAttribute("springBootVersion", getSpringBootVersion());		
+
+		// if (requestAttributes != null )
+		// {
+		// 	sessionID = requestAttributes.getSessionId();
+		// 	model.addAttribute("sessionID", sessionID);			
+		// }
+		// else
+		// {
+		// 	logger.error("***ERROR: requestAttributes is NULL!!!");
+		// }
+
+		// logger.debug("ModelSize: " + model.asMap().size());
 
 		logger.debug("Ends...");
 
 		return "welcome";
 	}
 	
-	private String getCurrentDateTime()
-    {
-        Log logger = methIDgetCurrentDateTime;
-        String returnValue = null;
+	// private String getCurrentDateTime()
+    // {
+    //     Log logger = methIDgetCurrentDateTime;
+    //     String returnValue = null;
 
-        logger.debug("Begins...");
+    //     logger.debug("Begins...");
 
-        returnValue = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+    //     returnValue = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
 
-        logger.debug("returnValue: " + returnValue);
+    //     logger.debug("returnValue: " + returnValue);
 
-        logger.debug("Ends...");
+    //     logger.debug("Ends...");
 
-        return( returnValue );
-    }
+    //     return( returnValue );
+    // }
 
-	private String getJavaVersion()
-	{
-        Log logger = methIDgetJavaVersion;
-        String returnValue = null;
+	// private String getJavaVersion()
+	// {
+    //     Log logger = methIDgetJavaVersion;
+    //     String returnValue = null;
 
-        logger.debug("Begins...");
+    //     logger.debug("Begins...");
 
- 		// Returns a Runtime.Version object
-        Runtime.Version version = Runtime.version();
+ 	// 	// Returns a Runtime.Version object
+    //     Runtime.Version version = Runtime.version();
         
-        // Extract version components cleanly
-        int major = version.feature(); // e.g., 11, 17, 21
-        int interim = version.interim();
-        int update = version.update();
+    //     // Extract version components cleanly
+    //     int major = version.feature(); // e.g., 11, 17, 21
+    //     int interim = version.interim();
+    //     int update = version.update();
 
-		returnValue = major + "." + interim + "." + update;
+	// 	returnValue = major + "." + interim + "." + update;
 
-       	logger.debug("JavaVersion: " + returnValue );
+    //    	logger.debug("JavaVersion: " + returnValue );
 
-        logger.debug("Ends...");
+    //     logger.debug("Ends...");
 
-		return( returnValue );
-	}
+	// 	return( returnValue );
+	// }
 
-	private String getSpringBootVersion(){
+	// private String getSpringBootVersion(){
 
-        Log logger = methIDgetSpringBootVersion;
-        String returnValue = null;
+    //     Log logger = methIDgetSpringBootVersion;
+    //     String returnValue = null;
 
-        logger.debug("Begins...");
+    //     logger.debug("Begins...");
 
-        returnValue = SpringBootVersion.getVersion();
+    //     returnValue = SpringBootVersion.getVersion();
 
-       	logger.debug("SpringBootVersion: " + returnValue );
+    //    	logger.debug("SpringBootVersion: " + returnValue );
 
-        logger.debug("Ends...");
+    //     logger.debug("Ends...");
 
-		return( returnValue );
-	}
+	// 	return( returnValue );
+	// }
+
 }

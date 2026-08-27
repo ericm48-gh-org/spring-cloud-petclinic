@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.eric.common.petclinic.system;
+package com.eric.common.petclinic.crash;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -30,7 +29,7 @@ class CrashController
 	
 	static
     {
-        methItriggerException  		= LogFactory.getLog(WelcomeController.class.getName() + ".triggerException()");
+        methItriggerException  		= LogFactory.getLog(CrashController.class.getName() + ".triggerException()");
     }
 
 	@GetMapping("/ooops")
