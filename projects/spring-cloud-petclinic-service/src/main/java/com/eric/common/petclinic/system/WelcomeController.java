@@ -30,18 +30,22 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import com.eric.common.petclinic.util.HostInfoUtil;
 
+import org.springframework.boot.SpringBootVersion;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 class WelcomeController {
 
-	private static final Log methIDwelcome, methIDgetCurrentDateTime;
+	private static final Log methIDwelcome, methIDgetCurrentDateTime, methIDgetJavaVersion, methIDgetSpringBootVersion;
 	
 	static
     {
         methIDwelcome          		= LogFactory.getLog(WelcomeController.class.getName() + ".welcome()");
         methIDgetCurrentDateTime    = LogFactory.getLog(WelcomeController.class.getName() + ".getCurrentDateTime()");
+        methIDgetJavaVersion    	= LogFactory.getLog(WelcomeController.class.getName() + ".getJavaVersion()");		
+        methIDgetSpringBootVersion 	= LogFactory.getLog(WelcomeController.class.getName() + ".getSpringBootVersion()");			
     }
 	
  	@Value("${application.version}")
@@ -75,6 +79,8 @@ class WelcomeController {
 
         model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
         model.addAttribute("currentDate", getCurrentDateTime());
+        model.addAttribute("javaVersion", getJavaVersion());
+        model.addAttribute("springBootVersion", getSpringBootVersion());		
 
 		if (requestAttributes != null )
 		{
@@ -109,4 +115,43 @@ class WelcomeController {
         return( returnValue );
     }
 
+	private String getJavaVersion()
+	{
+        Log logger = methIDgetJavaVersion;
+        String returnValue = null;
+
+        logger.debug("Begins...");
+
+ 		// Returns a Runtime.Version object
+        Runtime.Version version = Runtime.version();
+        
+        // Extract version components cleanly
+        int major = version.feature(); // e.g., 11, 17, 21
+        int interim = version.interim();
+        int update = version.update();
+
+		returnValue = major + "." + interim + "." + update;
+
+       	logger.debug("JavaVersion: " + returnValue );
+
+        logger.debug("Ends...");
+
+		return( returnValue );
+	}
+
+	private String getSpringBootVersion(){
+
+        Log logger = methIDgetSpringBootVersion;
+        String returnValue = null;
+
+        logger.debug("Begins...");
+
+        returnValue = SpringBootVersion.getVersion();
+
+       	logger.debug("SpringBootVersion: " + returnValue );
+
+        logger.debug("Ends...");
+
+		return( returnValue );
+	}
 }
