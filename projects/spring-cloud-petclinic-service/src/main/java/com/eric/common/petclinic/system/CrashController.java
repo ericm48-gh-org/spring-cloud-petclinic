@@ -33,7 +33,7 @@ class CrashController
         methItriggerException  		= LogFactory.getLog(WelcomeController.class.getName() + ".triggerException()");
     }
 
-	@GetMapping("/oups")
+	@GetMapping("/ooops")
 	public String triggerException() {
 
 		Log logger = methItriggerException;
