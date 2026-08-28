@@ -15,12 +15,10 @@
  */
 package com.eric.common.petclinic.vet;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.util.SerializationUtils;
-
-import com.eric.common.petclinic.vet.Vet;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer

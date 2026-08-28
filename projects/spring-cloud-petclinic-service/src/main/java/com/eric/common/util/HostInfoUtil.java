@@ -12,7 +12,6 @@ import java.net.UnknownHostException;
 @Slf4j
 public class HostInfoUtil 
 {
-
    	private static final Log methIDgetNodeName, methIDgetDeploymentName, methIDgetHostIPAddress;
 	
 	static
@@ -85,51 +84,6 @@ public class HostInfoUtil
 
         return( deploymentName );
     }
-
-    // public static String getHostName() 
-    // {
-    //     Log logger              = methIDgetHostName;
-    //     InetAddress localhost   = null;
-
-    //     String returnValue      = null;
-
-    //     logger.debug("Begins...");
-
-    //     // First, try getting from the HOSTNAME environment variable (common in Docker/cloud)
-    //     returnValue = System.getenv("HOSTNAME");
-        
-    //     if (returnValue == null || returnValue.isEmpty()) 
-    //     {
-    //         try 
-    //         {
-    //             localhost = InetAddress.getLocalHost();
-
-    //             if ( localhost != null )
-    //             {
-    //                 returnValue = localhost.getHostName();
-    //                 logger.debug("HostNameReturned: " + returnValue);                    
-    //             }
-    //             else
-    //             {
-    //                 logger.error ("***ERROR: localhost is NULL!");
-    //             }
-
-    //         } 
-    //         catch (UnknownHostException uhe) 
-    //         {
-    //             logger.error("***ERROR UnknownHostException Encountered: " + uhe.getLocalizedMessage());
-    //         }
-    //         catch (Exception ex) 
-    //         {
-    //             logger.error("***ERROR Exception Encountered: " + ex.getLocalizedMessage());
-    //         }    
-
-    //     }
-
-    //     logger.debug("Ends...");
-
-    //     return( returnValue );
-    // }    
 
     public static String getHostIPAddress() 
     {

@@ -27,9 +27,6 @@ public class WelcomeAdapter
         methIDgetJavaVersion    	= LogFactory.getLog(WelcomeAdapter.class.getName() + ".getJavaVersion()");		
         methIDgetSpringBootVersion 	= LogFactory.getLog(WelcomeAdapter.class.getName() + ".getSpringBootVersion()");
     }
-	
- 	// @Value("${application.version}")
-	// private String APP_VERSION;
 
     public WelcomeAdapter(@Value("${application.version}") String newValue) 
     {
