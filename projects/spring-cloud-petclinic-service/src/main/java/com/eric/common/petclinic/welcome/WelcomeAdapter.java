@@ -2,6 +2,8 @@ package com.eric.common.petclinic.welcome;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,11 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.context.request.RequestAttributes;
 
 import com.eric.common.petclinic.util.HostInfoUtil;
+import com.eric.common.petclinic.util.OSInfoUtil;
 
 @Component
 public class WelcomeAdapter 
 {
-	private static final Log methIDtoWelcomeModel, methIDgetCurrentDateTime, methIDgetJavaVersion, methIDgetSpringBootVersion;
+	private static final Log methIDtoWelcomeModel, methIDgetCurrentDateTime, methIDgetJavaVersion, 
+        methIDgetSpringBootVersion, methIDgetOSInfo;
 	
     private static String applicationVersion;
 
@@ -26,6 +30,7 @@ public class WelcomeAdapter
         methIDgetCurrentDateTime    = LogFactory.getLog(WelcomeAdapter.class.getName() + ".getCurrentDateTime()");
         methIDgetJavaVersion    	= LogFactory.getLog(WelcomeAdapter.class.getName() + ".getJavaVersion()");		
         methIDgetSpringBootVersion 	= LogFactory.getLog(WelcomeAdapter.class.getName() + ".getSpringBootVersion()");
+        methIDgetOSInfo 	        = LogFactory.getLog(WelcomeAdapter.class.getName() + ".getOSInfo()");        
     }
 
     public WelcomeAdapter(@Value("${application.version}") String newValue) 
@@ -45,9 +50,8 @@ public class WelcomeAdapter
    		String nodeName  					= null;
    		String deploymentName  				= null;
 		String ipAddress 					= null;
-		//RequestAttributes requestAttributes = null;
-
-		String sessionID 					= null;
+        String sessionID 					= null;
+        String osInfo                       = null;
 
         logger.debug("Begins...");
 
@@ -55,8 +59,6 @@ public class WelcomeAdapter
 		logger.debug("ModelReceivedSize: " + model.asMap().size());
 
 		logger.debug("APP_VERSION: " + applicationVersion);
-
-		//requestAttributes 	= RequestContextHolder.getRequestAttributes();
 
 		nodeName 			= HostInfoUtil.getNodeName();		
 		deploymentName 		= HostInfoUtil.getDeploymentName();
@@ -71,7 +73,19 @@ public class WelcomeAdapter
         model.addAttribute("spring.message", "Hello, Thymeleaf in Spring Boot!");
         model.addAttribute("currentDate", getCurrentDateTime());
         model.addAttribute("javaVersion", getJavaVersion());
-        model.addAttribute("springBootVersion", getSpringBootVersion());		
+        model.addAttribute("springBootVersion", getSpringBootVersion());
+
+        osInfo = this.getOSInfo();
+
+		if (osInfo != null )
+		{
+			model.addAttribute("osInfo", osInfo);			
+		}
+		else
+		{
+			logger.error("***ERROR: osInfo is NULL!!!");
+		}
+
 
 		if (requestAttributes != null )
 		{
@@ -129,7 +143,8 @@ public class WelcomeAdapter
 		return( returnValue );
 	}
 
-	private String getSpringBootVersion(){
+	private String getSpringBootVersion()
+    {
 
         Log logger = methIDgetSpringBootVersion;
         String returnValue = null;
@@ -144,5 +159,37 @@ public class WelcomeAdapter
 
 		return( returnValue );
 	}
+
+
+    private String getOSInfo()
+    {
+        Log logger = methIDgetOSInfo;
+
+        Map<String, String> osInfo  = null;
+        String returnValue          = null;
+
+        logger.debug("Begins...");
+
+        osInfo = OSInfoUtil.getOSDetails();
+
+        if ( osInfo != null )
+        {
+            returnValue = osInfo.get("osName");
+            returnValue = returnValue + ": " + osInfo.get("lsbDescription");
+            returnValue = returnValue + ": " + osInfo.get("lsbCodename");
+            returnValue = returnValue + ": " + osInfo.get("osArch");            
+        }
+        else
+        {
+            logger.error("osInfo IS NULL!");
+        }
+
+        logger.debug("returnValue: " + returnValue);
+
+        logger.debug("Ends...");
+
+		return( returnValue );
+
+    }
 
 }

@@ -19,7 +19,7 @@ public class OSInfoUtil
         methIDexecuteCommand        = LogFactory.getLog(OSInfoUtil.class.getName() + ".executeCommand()");
     }
 
-    public Map<String, String> getOSDetails() 
+    public static Map<String, String> getOSDetails() 
     {
         Log logger = methIDgetOSDetails;
 
@@ -47,7 +47,7 @@ public class OSInfoUtil
         return( returnValue );
     }
 
-    private String executeCommand(String command) 
+    private static String executeCommand(String command) 
     {
         Log logger              = methIDexecuteCommand;
         BufferedReader reader   = null;

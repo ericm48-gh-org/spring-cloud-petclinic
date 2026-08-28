@@ -51,7 +51,6 @@ class WelcomeController {
 		String appVersion 						= null;
 		boolean keepOnTrucking					= true;
 
-
  		logger.debug("Begins...");
 
 		while ( keepOnTrucking )
