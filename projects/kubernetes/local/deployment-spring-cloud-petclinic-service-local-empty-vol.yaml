@@ -59,8 +59,7 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            #image: ericm24/spring-cloud-petclinic-service:2.8.66-RELEASE
-            image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:2.8.66-RELEASE            
+            image: ghcr.io/ericm48-gh-org/spring-cloud-petclinic-service:3.0.0-RELEASE            
             labels:
               app: spring-cloud-petclinic-service
             imagePullPolicy: Always
