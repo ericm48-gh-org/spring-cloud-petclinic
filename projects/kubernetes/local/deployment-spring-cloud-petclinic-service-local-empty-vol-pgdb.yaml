@@ -30,21 +30,57 @@ items:
         - protocol: TCP
           port: 5432
 
+# MUST USE THIS SPEC For MetalLB with Minikube
   - apiVersion: v1
     kind: Service
     metadata:
+      annotations:
+        metallb.io/ip-allocated-from-pool: minikube-pool
       labels:
         app: spring-cloud-petclinic-service
-      name: spring-cloud-petclinic-service
+      name: spring-cloud-petclinic-service-deployment
     spec:
+      allocateLoadBalancerNodePorts: true
       ports:
-        - name: http
-          port: 8080
-          targetPort: 8080
-          protocol: TCP
+      - port: 80
+        protocol: TCP
+        targetPort: 8080
       selector:
         app: spring-cloud-petclinic-service
-      type: ClusterIP
+      sessionAffinity: None
+      type: LoadBalancer
+
+  # - apiVersion: v1
+  #   kind: Service
+  #   metadata:
+  #     name: spring-cloud-petclinic-service
+  #     annotations:
+  #           prometheus.io/scrape: 'true'
+  #     labels:
+  #       name: spring-cloud-petclinic-service
+  #   spec:
+  #     type: LoadBalancer
+  #     ports:
+  #     - port: 80
+  #       targetPort: 8080
+  #     selector:
+  #       name: spring-cloud-petclinic-service
+
+  # - apiVersion: v1
+  #   kind: Service
+  #   metadata:
+  #     labels:
+  #       app: spring-cloud-petclinic-service
+  #     name: spring-cloud-petclinic-service
+  #   spec:
+  #     ports:
+  #       - name: http
+  #         port: 8080
+  #         targetPort: 8080
+  #         protocol: TCP
+  #     selector:
+  #       app: spring-cloud-petclinic-service
+  #     type: ClusterIP
 
   - apiVersion: apps/v1
     kind: Deployment
@@ -87,7 +123,7 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            image: docker.io/ericm24/spring-cloud-petclinic-service:3.0.0-RELEASE
+            image: docker.io/ericm24/spring-cloud-petclinic-service:3.0.2-SNAPSHOT
             # Not sure why this quit working.
             #image: ericm24/spring-cloud-petclinic-service:3.0.0.0-RELEASE
             imagePullPolicy: IfNotPresent
