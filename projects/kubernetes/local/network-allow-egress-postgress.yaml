@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-to-postgres
+spec:
+  podSelector:
+    matchLabels:
+      app: spring-cloud-petclinic-service
+  policyTypes:
+  - Egress
+  egress:
+
+  # Allow DNS resolution (required if DB_HOST is a domain name)
+  - to:
+    - namespaceSelector: {} 
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+
+  # Allow traffic to PostgreSQL
+  - to:
+    # Optional: Restrict to specific IP blocks if database is external
+    - ipBlock:
+        cidr: 0.0.0.0/0 
+    ports:
+    - protocol: TCP
+      port: 5432

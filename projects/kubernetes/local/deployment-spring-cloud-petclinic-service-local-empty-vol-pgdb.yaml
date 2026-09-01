@@ -2,6 +2,34 @@
 apiVersion: v1
 kind: List
 items:
+  - apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: allow-egress-to-postgres
+    spec:
+      podSelector:
+        matchLabels:
+          app: spring-cloud-petclinic-service
+      policyTypes:
+      - Egress
+      egress:
+      # Allow DNS resolution (required if DB_HOST is a domain name)
+      # - to:
+      #   - namespaceSelector: {} 
+      #   ports:
+      #   - protocol: UDP
+      #     port: 53
+      #   - protocol: TCP
+      #     port: 53
+      # Allow traffic to PostgreSQL
+      - to:
+        # Optional: Restrict to specific IP blocks if database is external
+        - ipBlock:
+            cidr: 0.0.0.0/0 
+        ports:
+        - protocol: TCP
+          port: 5432
+
   - apiVersion: v1
     kind: Service
     metadata:
@@ -13,10 +41,6 @@ items:
         - name: http
           port: 8080
           targetPort: 8080
-          protocol: TCP
-        - name: debug
-          port: 5005
-          targetPort: 5005
           protocol: TCP
       selector:
         app: spring-cloud-petclinic-service
@@ -68,10 +92,12 @@ items:
             #image: ericm24/spring-cloud-petclinic-service:3.0.0.0-RELEASE
             imagePullPolicy: IfNotPresent
             env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "postgres"
               - name: KUBE_NODE_NAME
                 valueFrom:
                   fieldRef:
-                    fieldPath: spec.nodeName                    
+                    fieldPath: spec.nodeName
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD
                 value: INFO
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
@@ -95,9 +121,6 @@ items:
             ports:           
             - containerPort: 8080
               name: http
-              protocol: TCP
-            - containerPort: 5005
-              name: debug
               protocol: TCP
 
 #            readinessProbe:
