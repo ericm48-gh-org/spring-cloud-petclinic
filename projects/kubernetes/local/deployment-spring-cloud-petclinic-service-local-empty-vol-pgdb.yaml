@@ -2,33 +2,33 @@
 apiVersion: v1
 kind: List
 items:
-  - apiVersion: networking.k8s.io/v1
-    kind: NetworkPolicy
-    metadata:
-      name: allow-egress-to-postgres
-    spec:
-      podSelector:
-        matchLabels:
-          app: spring-cloud-petclinic-service
-      policyTypes:
-      - Egress
-      egress:
-      # Allow DNS resolution (required if DB_HOST is a domain name)
-      # - to:
-      #   - namespaceSelector: {} 
-      #   ports:
-      #   - protocol: UDP
-      #     port: 53
-      #   - protocol: TCP
-      #     port: 53
-      # Allow traffic to PostgreSQL
-      - to:
-        # Optional: Restrict to specific IP blocks if database is external
-        - ipBlock:
-            cidr: 0.0.0.0/0 
-        ports:
-        - protocol: TCP
-          port: 5432
+  # - apiVersion: networking.k8s.io/v1
+  #   kind: NetworkPolicy
+  #   metadata:
+  #     name: allow-egress-to-postgres
+  #   spec:
+  #     podSelector:
+  #       matchLabels:
+  #         app: spring-cloud-petclinic-service
+  #     policyTypes:
+  #     - Egress
+  #     egress:
+  #     # Allow DNS resolution (required if DB_HOST is a domain name)
+  #     # - to:
+  #     #   - namespaceSelector: {} 
+  #     #   ports:
+  #     #   - protocol: UDP
+  #     #     port: 53
+  #     #   - protocol: TCP
+  #     #     port: 53
+  #     # Allow traffic to PostgreSQL
+  #     - to:
+  #       # Optional: Restrict to specific IP blocks if database is external
+  #       - ipBlock:
+  #           cidr: 0.0.0.0/0 
+  #       ports:
+  #       - protocol: TCP
+  #         port: 5432
 
 # MUST USE THIS SPEC For MetalLB with Minikube
   - apiVersion: v1
@@ -50,22 +50,7 @@ items:
       sessionAffinity: None
       type: LoadBalancer
 
-  # - apiVersion: v1
-  #   kind: Service
-  #   metadata:
-  #     name: spring-cloud-petclinic-service
-  #     annotations:
-  #           prometheus.io/scrape: 'true'
-  #     labels:
-  #       name: spring-cloud-petclinic-service
-  #   spec:
-  #     type: LoadBalancer
-  #     ports:
-  #     - port: 80
-  #       targetPort: 8080
-  #     selector:
-  #       name: spring-cloud-petclinic-service
-
+  # Use this for simple ClusterIP, and you will have to port-forward with minikube.
   # - apiVersion: v1
   #   kind: Service
   #   metadata:
@@ -130,6 +115,8 @@ items:
             env:
               - name: SPRING_PROFILES_ACTIVE
                 value: "postgres"
+              - name: POSTGRES_IP
+                value: '10.244.231.241'
               - name: KUBE_NODE_NAME
                 valueFrom:
                   fieldRef:
@@ -138,6 +125,8 @@ items:
                 value: INFO
               - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_BEANS
                 value: INFO
+              - name: LOGGING_LEVEL_COM_ZAXXER_HIKARI
+                value: DEBUG              
               - name: LOGGING_LEVEL_COM_ERIC                
                 value: DEBUG
               - name: SPRING_CONFIG_IMPORT
