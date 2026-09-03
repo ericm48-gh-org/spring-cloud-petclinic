@@ -35,7 +35,7 @@
             "name": "PetClinicApplication-Remote-K8s",
             "projectName": "spring-cloud-petclinic-service",
             "request": "attach",
-            "hostName": "10.38.48.153",
+            "hostName": "10.38.240.146",
             "port": 5005
         }        
     ]
