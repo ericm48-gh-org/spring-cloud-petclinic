@@ -108,7 +108,7 @@ items:
 
           containers:
           - name: spring-cloud-petclinic-service
-            image: docker.io/ericm24/spring-cloud-petclinic-service:3.0.2-SNAPSHOT
+            image: docker.io/ericm24/spring-cloud-petclinic-service:3.0.4-SNAPSHOT
             # Not sure why this quit working.
             #image: ericm24/spring-cloud-petclinic-service:3.0.0.0-RELEASE
             imagePullPolicy: IfNotPresent
@@ -116,7 +116,7 @@ items:
               - name: SPRING_PROFILES_ACTIVE
                 value: "postgres"
               - name: POSTGRES_IP
-                value: '10.244.231.241'
+                value: '10.244.231.208'
               - name: KUBE_NODE_NAME
                 valueFrom:
                   fieldRef:
