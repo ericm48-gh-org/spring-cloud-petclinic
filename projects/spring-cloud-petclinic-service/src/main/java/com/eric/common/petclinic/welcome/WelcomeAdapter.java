@@ -53,6 +53,8 @@ public class WelcomeAdapter
         String sessionID 					= null;
         String osInfo                       = null;
 
+        String applicationVersion2          = null;
+
         logger.debug("Begins...");
 
         logger.debug("    ModelReceived: " + model.toString());
@@ -64,7 +66,11 @@ public class WelcomeAdapter
 		deploymentName 		= HostInfoUtil.getDeploymentName();
 		ipAddress 			= HostInfoUtil.getHostIPAddress();
 
-        model.addAttribute("applicationVersion", applicationVersion);
+        applicationVersion2 = this.applicationVersion;
+        
+		logger.debug("applicationVersion2: " + applicationVersion2);
+
+        model.addAttribute("applicationVersion", applicationVersion2);
 
         model.addAttribute("nodeName", nodeName);		
         model.addAttribute("deploymentName", deploymentName);
