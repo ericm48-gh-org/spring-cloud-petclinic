@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 class WelcomeController {
 
-	private static final Log methIDwelcome; //, methIDgetCurrentDateTime, methIDgetJavaVersion, methIDgetSpringBootVersion;
+	private static final Log methIDwelcome; 
 	
 	static
     {

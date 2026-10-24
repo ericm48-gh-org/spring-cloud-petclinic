@@ -2,7 +2,6 @@ package com.eric.common.petclinic.welcome;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -19,8 +18,8 @@ import com.eric.common.petclinic.util.OSInfoUtil;
 @Component
 public class WelcomeAdapter 
 {
-	private static final Log methIDtoWelcomeModel, methIDgetCurrentDateTime, methIDgetJavaVersion, 
-        methIDgetSpringBootVersion, methIDgetOSInfo;
+	private static final Log methIDtoWelcomeModel, methIDgetCurrentDateTime, 
+                             methIDgetJavaVersion, methIDgetSpringBootVersion, methIDgetOSInfo;
 	
     private static String applicationVersion;
 
